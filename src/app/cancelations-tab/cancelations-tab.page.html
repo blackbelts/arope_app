@@ -1,0 +1,28 @@
+<ion-content fullscreen>
+  <div id="auth-img">
+    <div class="overlay">
+      <ion-list class="list-back">
+        <ion-list-header>
+          Cancelation Requests
+        </ion-list-header>
+
+        <ion-item *ngFor="let item of rows" >
+          
+          <ion-label>
+            <h2>{{item.name}}</h2>
+            <h3>{{item.policy}}</h3>
+            <p>{{item.product}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngFor="let item of rows" >
+          
+          <ion-label>
+            <h2>{{item.name}}</h2>
+            <h3>{{item.policy}}</h3>
+            <p>{{item.product}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

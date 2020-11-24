@@ -1,0 +1,51 @@
+$show-image-auth: true;
+$home-image: url(/assets/images/background-img.jpg);
+$backgroudn-opacity: 0.5;
+
+@mixin background {
+    @if $show-image-auth {
+        &#auth-img {
+            background: url(/assets/img/background-img.jpg);
+            background-size: cover;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+
+    //         &:after {
+    //             content: '';
+    //             position: absolute;
+    //             top: 0;
+    //             left: 0;
+    //             width: 100%;
+    //             height: 100%;
+    //             z-index: 0;
+    // background: rgba(68, 68, 68, $backgroudn-opacity);
+    //         }
+        }
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: rgba(68, 68, 68, $backgroudn-opacity);
+}
+
+#auth-img {
+   @include background();
+}
+.list-back{
+    background-color: rgba(255,255,255,.7);
+    opacity: 1;
+}
+ion-item{
+    --ion-background-color:rgba(255,255,255,0.3) !important;
+    --ion-opacity: 1 !important;
+ }
+    

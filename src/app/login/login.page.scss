@@ -1,0 +1,76 @@
+$show-image-auth: true;
+$home-image: url(/assets/images/background-img.jpg);
+$backgroudn-opacity: 0.5;
+
+@mixin easeOut {
+    transition: all 0.5s ease-out;
+}
+
+
+@mixin background {
+    @if $show-image-auth {
+        &#auth-img {
+            background: url(/assets/img/background-img.jpg);
+            background-size: cover;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+
+    //         &:after {
+    //             content: '';
+    //             position: absolute;
+    //             top: 0;
+    //             left: 0;
+    //             width: 100%;
+    //             height: 100%;
+    //             z-index: 0;
+    // background: rgba(68, 68, 68, $backgroudn-opacity);
+    //         }
+        }
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: rgba(68, 68, 68, $backgroudn-opacity);
+}
+
+#auth-img {
+   @include background();
+}
+
+ion-toolbar {
+    --background: transparent;
+    margin-top: 62px;
+    height: 10vh;
+}
+
+h1 {
+    color: whitesmoke;
+
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+
+ion-img {
+    width: 60px;
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+
+}
+
+ion-item {
+    --border-color: whitesmoke;
+    --background: transparent;
+    --color	:whitesmoke
+  }

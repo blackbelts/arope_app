@@ -1,17 +1,79 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding >
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div id="tab2-img">
+    <div class="overlay">
+      <ion-list no-lines>
+        <ion-item class="back">
+          <ion-label style="color: #073e89 !important;" >{{'login.Language' | translate }}</ion-label>
+          <ion-select  style="color: #073e89 !important;" [(ngModel)]="selectedLanguage" (ionChange)='languageChanged()' [cancelText]="'login.CANCEL' | translate">
+            <ion-select-option style="color: #073e89 !important;" *ngFor="let item of languages" [value]="item.code">{{item.code}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-toolbar>
+        <ion-title>
+          <ion-img *ngIf="data"  src="data:image/png;base64,{{ data.user_image  }}"></ion-img>
+        </ion-title>
+      </ion-toolbar>
+      <div class="clearfix"></div>
+  
+      <h2 text-center>
+       <small>{{'home.title' | translate}}</small>
+
+      </h2>
+      <ul class="wizard o_partner_dashboard_wizard d-flex mt32 mb32">
+                                        
+        <li class="o_partner_dashboard_grade_active_ready">Ready Partner <span class="chevron"></span></li>
+        <li class="pl-3 ">Silver Partner <span class="chevron"></span></li>
+        <li class="">Gold Partner</li>
+    
+      </ul>
+      <ion-row>
+
+        <ion-col (click)="goToQuotationService()">
+          <div>
+            <ion-icon name="cash" ></ion-icon>
+            <p class="color">{{'home.Quick Quote' | translate}}</p>
+          </div>
+        </ion-col>
+        <ion-col (click)="goToInsuranceApps()">
+          <div>
+            <ion-icon name="heart" ></ion-icon>
+            <p class="color">{{'home.Insurance Application' | translate}}</p>
+          </div>
+        </ion-col>
+    
+        <ion-col>
+            <div>
+              <ion-icon name="logo-usd" ></ion-icon>
+              <p class="color">{{'home.Claims' | translate}}</p>
+            </div>
+        </ion-col>
+        <ion-col (click)="goToRequests()">
+            <div>
+              <ion-icon name="bag-add" ></ion-icon>
+              <!-- <i class="fas fa-hand-holding-usd new"></i> -->
+              <!-- <ion-icon name="cart" ></ion-icon> -->
+              <p class="color">{{'home.Requests' | translate}}</p>
+            </div>
+        </ion-col>
+        <!-- <ion-col (click)="gotosurrenders(profile)"> -->
+        <ion-col>
+            <div>
+              <ion-icon name="document" ></ion-icon>
+              <p class="color">{{'home.Policy Services' | translate}}</p>
+            </div>
+        </ion-col>
+        
+        <ion-col>
+          <div>
+            <ion-icon name="log-out" ></ion-icon>
+            <p class="color">{{'home.Sign Out' | translate}}</p>
+          </div>
+      </ion-col>
+    
+      </ion-row>
+    </div>
+  </div>
 </ion-content>

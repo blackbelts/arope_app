@@ -1,0 +1,43 @@
+.cardHeader {
+    background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
+    letter-spacing: -0.02em;
+    word-spacing: 0.015em;
+}
+
+.cardTitle {
+    color: #fff;
+    font-size: 14px;
+}
+
+.cardContent {
+    padding-top: 7px;
+}
+
+.cardFooter {
+    padding: 0px 20px;
+    background-color: #f8f9fa;
+}
+.btn {
+    // color: #FFFFFF;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    // border-color: ;
+    color: #343a40;
+    padding: 11px 11px;
+    border: 1px solid #343a40;
+    border-radius: 3px;
+}
+.color {
+    color: #073e89;
+}
+.th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6 !important;
+}
+.colors-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}

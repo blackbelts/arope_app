@@ -1,0 +1,99 @@
+<ion-content>
+  <div >
+
+    <!-- Theme classes dark, material, bootstrap -->
+    <!-- <ngx-datatable 
+      style="width: 100%"
+      class="dark"
+      [limit]="8" 
+      [rows]="rows" 
+      [rowHeight]="50" 
+      [columns]="columns"
+      [columnMode]="'force'" 
+      [sortType]="'multi'" 
+      [headerHeight]="50" 
+      [footerHeight]="50">
+    </ngx-datatable> -->
+    <ion-card class="welcome-card card-background">
+      <ion-card-content  class="card-background">
+        <ion-list>
+          <ion-item>
+            <ion-col>
+              <span style="color: #073e89;">Request Num</span>
+            </ion-col>
+            <ion-col>
+              <span style="color: #073e89;">Policy Num</span>
+            </ion-col>
+            <ion-col>
+              <span style="color: #073e89;">Product</span>
+            </ion-col>
+            
+          </ion-item>
+        </ion-list>
+        
+  
+        <!-- <embed [src]='pdfURL(item.name)' width="70%"  />
+        {{item.name}} -->
+  
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let item of rows"  class="welcome-card card-background">
+      <ion-card-content  class="card-background">
+        <ion-list>
+          <ion-item>
+            <ion-col>
+              <span style="color: #aeafb2;">{{item.name}}</span>
+            </ion-col>
+            <ion-col>
+              <span style="color: #aeafb2;">{{item.policy}}</span>
+            </ion-col>
+            <ion-col>
+              <span style="color: #aeafb2;">{{item.product}}</span>
+            </ion-col>
+            
+          </ion-item>
+        </ion-list>
+        
+  
+        <!-- <embed [src]='pdfURL(item.name)' width="70%"  />
+        {{item.name}} -->
+  
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let item of rows"  class="welcome-card card-background">
+      <ion-card-content  class="card-background">
+        <ion-list>
+          <ion-item>
+            <ion-col>
+              <span style="color: #aeafb2;">{{item.name}}</span>
+            </ion-col>
+            <ion-col>
+              <span style="color: #aeafb2;">{{item.policy}}</span>
+            </ion-col>
+            <ion-col>
+              <span style="color: #aeafb2;">{{item.product}}</span>
+            </ion-col>
+            
+          </ion-item>
+        </ion-list>
+        
+  
+        <!-- <embed [src]='pdfURL(item.name)' width="70%"  />
+        {{item.name}} -->
+  
+      </ion-card-content>
+    </ion-card>
+    <!-- <ion-row class="row header">
+      <ion-col class="col">Request Num</ion-col>
+      <ion-col class="col">Policy Num</ion-col>
+      <ion-col class="col">Product</ion-col>
+      
+    </ion-row>
+    <ion-row class="row"  *ngFor="let item of rows" >
+      <ion-col class="col">{{item.name}}</ion-col>
+      <ion-col class="col">{{item.policy}}</ion-col>
+      <ion-col class="col">{{item.product}}</ion-col>
+    </ion-row> -->
+
+  </div>
+</ion-content>
