@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'poppins';
+    src: url('../assets/fonts/Poppins-Light.ttf');//mine
+    // src: url('path/to/your/font/file');//path to your font file
+  }
+  
+  * {
+    font-family: 'poopins' !important;
+  }
+.my-custom-class .popover-wrapper.sc-ion-popover-md .popover-content.sc-ion-popover-md {
+    top: 60px !important;
+    right: 55px !important;
+  }
+  .ion-color-tertiary {
+    --ion-color-base : red !important;
+  }

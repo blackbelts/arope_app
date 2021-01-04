@@ -1,7 +1,14 @@
+.new-background-color{
+    --background: #073e89!important;
+    --color: white;
+    --font-size: 14px;
+  }
 .cardHeader {
     background: linear-gradient(150deg, #073e89 20%, #073e89 80%) !important;
     letter-spacing: -0.02em;
     word-spacing: 0.015em;
+    height: 44px;
+
 }
 
 .cardTitle {
@@ -35,9 +42,92 @@
     border-bottom: 1px solid #dee2e6;
     padding: 0.75rem;
     border-top: 1px solid #dee2e6 !important;
+    text-align: center;
 }
 .colors-img {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
 }
+.icon {
+    font-size: 15px;
+    color: #e77a11
+}
+ion-card {
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,.3);
+  
+  }
+  .leave-content-div {
+    background: #fff;
+    border-radius: 50px 50px 0px 0px;
+    top: -50px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .leave-empty-div {
+    background: #073e89;
+    height: 280px;
+  }
+  
+  .user-icon {
+    font-size: 85px;
+    /* margin: 10px; */
+    height: 100%;
+    width: 100%;
+    /* margin: auto;*/
+  }
+  
+  .profile-pic {
+    margin: 0 auto;
+    display: block;
+    height: 100%;
+    border-radius: 50%;
+    width: 100%;
+  }
+  
+  .employee-div {
+    text-align: center;
+    border: solid 1px #dcdcdc;
+    border-radius: 50%;
+    background: #fff;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+  }
+  
+  .employee-name {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin-top: 8px;
+  }
+  
+  .employee-design {
+    font-size: 14px;
+    text-align: center;
+    color: white;
+  }
+  
+  .custom-icon-edit-icon {
+    font-size: 35px;
+    color: white;
+    font-weight: 500;
+  }
+  
+  .edit-icon {
+    background: #FE9C45;
+    border-radius: 20px;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    margin-left: 100px;
+  }
+  #tab2-img{
+    background: #fff;
+    border-radius: 50px 50px 0px 0px;
+    top: -50px;
+    position: relative;
+    width: 100%;
+  }

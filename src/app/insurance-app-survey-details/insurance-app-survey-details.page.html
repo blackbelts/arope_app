@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">{{"home.Insurance Application Survey" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{"insurance-application.Application State" | translate}}
+        <ion-chip color="primary">
+          <ion-label *ngIf="state"  style="color: #073e89 !important;">{{state}}</ion-label>
+        </ion-chip>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content >
+      {{message}}
+    </ion-card-content>
+
+  </ion-card>
+  <div  *ngFor="let item of allData" >
+    <ion-item (click)="expandItem(item)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+        <ion-icon slot="end" name="chevron-down-circle-outline" *ngIf="!item.expanded"></ion-icon>
+        <ion-icon slot="end" item-left name="chevron-up-circle-outline" *ngIf="item.expanded"></ion-icon>
+        <ion-label class="title">{{ item.name }}</ion-label>
+    </ion-item>
+    <app-expandable [expanded]="item.expanded">
+      <ion-card *ngIf="item.name == 'Application Info'" >
+        <ion-card-content>
+
+          <h4 class="color">{{'insurance-application.Survey Number' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.surveyNumber}}</p>
+          <h4 class="color">{{'insurance-application.Application Number' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.applicationNumber}}</p>
+          <h4 class="color">{{'insurance-application.LOB' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.lob}}</p>
+          <h4 class="color">{{'insurance-application.Product' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.product}}</p>
+          
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="item.name == 'Customer Info'" >
+        <ion-card-content>
+          <h4 class="color">{{'insurance-application.Customer Name' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.name}}</p>
+          <h4 class="color">{{'insurance-application.Customer Phone' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.phone}}</p>
+          <h4 class="color">{{'insurance-application.Customer Email' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.email}}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="item.name == 'Survey Report'" >
+        <ion-card-content style="padding: 0;">
+          <form *ngIf="state == 'Surveyor Assigned'"   #form="ngForm" (ngSubmit)="submitSurvey(form)">
+            <ion-grid>
+              <ion-row color="primary" justify-content-center>
+                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                  <div padding>
+                    <ion-item>
+                      <ion-label position="stacked">{{ 'insurance-application.Upload Survey Report' | translate }}</ion-label>
+                      <ion-input name="report" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label position="stacked">{{ 'insurance-application.Recommendation' | translate }}</ion-label>
+                      <ion-input  name="recommendation" type="text" ngModel></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label position="stacked">{{ 'insurance-application.Comment' | translate }}</ion-label>
+                      <ion-input  name="comment" type="text" ngModel></ion-input>
+                    </ion-item>
+                  </div>
+                </ion-col>
+                <ion-col  class="ion-text-center">
+                  <ion-button class="saveButton" expand="full" size="small" type="submit" [disabled]="form.invalid">
+                    <ion-icon slot="start" name="checkmark"></ion-icon>
+                    {{ 'insurance-application.Submit' | translate }}
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+          <div *ngIf="state != 'Surveyor Assigned'">
+            <ion-item>
+              <ion-button (click)="downloadReport()" class="saveButton" expand="full" size="small">
+                {{ 'insurance-application.Survey Report' | translate }}
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <h4 class="color">{{'insurance-application.Recommendation' | translate }} : </h4>
+              <p style="color: rgb(174, 175, 178);">{{this.recommendation}}</p>
+            </ion-item>
+            <ion-item>
+              <h4 class="color">{{'insurance-application.Comment' | translate }} : </h4>
+              <p style="color: rgb(174, 175, 178);">{{this.comment}}</p>
+            </ion-item>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </app-expandable>
+  </div>
+</ion-content>

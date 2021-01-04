@@ -1,7 +1,292 @@
+<!-- <ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">{{"tabs.Dashboard" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header> -->
 
+<ion-content fullscreen *ngIf="this.shared.group == 'Broker' || this.shared.group == 'Customer'" >
 
-<ion-content>
-  <ion-card>
+  <div class="leave-empty-div">
+    <ion-toolbar class="new-background-color">
+      <ion-buttons slot="start">
+        <ion-button (click)="back()">
+          <ion-icon style="font-size: 25px !important;" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+        
+      </ion-buttons>
+    </ion-toolbar>
+    <!-- <br/> -->
+    <div class="employee-div">
+         <!-- <div class="edit-icon">
+          <span class="custom-icon-edit-icon" ></span>
+      </div> -->
+        <div class="user-icon" *ngIf="data">
+          <ion-img *ngIf="!data.user_image"  src="../../assets/img/empty.png"></ion-img>
+          <img *ngIf="data.user_image" class=profile-pic src="data:image/png;base64,{{ data.user_image  }}">
+        </div>
+    </div>
+    <div style="margin-top: 8px;" class="employee-design">{{this.data.user.name}}</div>
+  </div>
+  <div id="tab2-img">
+    <!-- <ion-card>
+      <ion-card-header class="cardHeader">
+        <ion-card-title class="cardTitle">{{"tab1.Your Profile" | translate}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content class="cardContent">
+        <p class="color">{{this.data.user.name}}</p>
+        <br/>
+        <span class="color">{{'tab1.FRA No' | translate}} : </span>
+        <span style="color: black;">{{this.data.user.fra}}</span>
+        <br/>
+        <span class="color">{{'tab1.Expiration Date' | translate}} : </span>
+        <span style="color: black;">{{this.data.user.exp_date}}</span>
+        <br/>
+        <span class="color">{{'tab1.Mobil' | translate}} : </span>
+        <span style="color: black;">{{this.data.user.mobile}}</span>
+        <br/>
+        <span class="color">{{'tab1.Mail' | translate}} : </span>
+        <span style="color: black;">{{this.data.user.mail}}</span>
+        <br/>
+      </ion-card-content> -->
+      <!-- <ion-row class="cardFooter">
+        <ion-col>
+          <button class="btn">Light</button>
+        </ion-col>
+      </ion-row> -->
+    <!-- </ion-card> -->
+    <ion-card>
+      <ion-card-header class="cardHeader">
+        <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Production per LOB in EGP" | translate}}</p>
+        <br/>
+        <canvas id="pieCanvas" ></canvas>
+        
+      </ion-card-content>
+      <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToPolicies()" class="btn">{{'tab1.Your Policies' | translate}}</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+    <ion-card>
+      <!-- <ion-card-header class="cardHeader">
+        <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
+      </ion-card-header> -->
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Target Vs Production" | translate}}</p>
+        <br/>
+        <canvas id="mixed" ></canvas>
+        
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <!-- <ion-card-header class="cardHeader">
+        <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
+      </ion-card-header> -->
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Current Year Vs Last Year" | translate}}</p>
+        <br/>
+        <canvas id="currentVsLast" ></canvas>
+        
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header class="cardHeader">
+        <ion-card-title class="cardTitle">{{"tab1.Follow up list" | translate}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Renewals" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.Color" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="th">
+            <img class="colors-img" src="../../assets/img/red.png"/>
+          </ion-col>
+          <ion-col class="th">{{this.data.renews.Red.count}}</ion-col>
+          <ion-col class="th">{{this.data.renews.Red.total.toFixed(0)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="th">
+            <img class="colors-img" src="../../assets/img/orange.png"/>
+          </ion-col>
+          <ion-col class="th">{{this.data.renews.Orange.count}}</ion-col>
+          <ion-col class="th">{{this.data.renews.Orange.total.toFixed(0)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="th">
+            <img class="colors-img" src="../../assets/img/green.png"/>
+          </ion-col>
+          <ion-col class="th">{{this.data.renews.Green.count}}</ion-col>
+          <ion-col class="th">{{this.data.renews.Green.total.toFixed(0)}}</ion-col>
+        </ion-row>
+      </ion-card-content>
+      <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToRenewls()" class="btn">{{'tab1.Your Renewals' | translate}}</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Permium under collection" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.Color" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="th">
+            <img class="colors-img" src="../../assets/img/red.png"/>
+          </ion-col>
+          <ion-col class="th">{{this.data.collections.Red.count}}</ion-col>
+          <ion-col class="th">{{this.data.collections.Red.total.toFixed(0)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="th">
+            <img class="colors-img" src="../../assets/img/orange.png"/>
+          </ion-col>
+          <ion-col class="th">{{this.data.collections.Orange.count}}</ion-col>
+          <ion-col class="th">{{this.data.collections.Orange.total.toFixed(0)}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="th">
+            <img class="colors-img" src="../../assets/img/green.png"/>
+          </ion-col>
+          <ion-col class="th">{{this.data.collections.Green.count}}</ion-col>
+          <ion-col class="th">{{this.data.collections.Green.total.toFixed(0)}}</ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+      <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToCollections()" class="btn">{{'tab1.Your Collections' | translate}}</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Complaints" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.Color" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Stage" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of this.data.complaint_count" >
+          <ion-col class="th" *ngIf="item.stage != 'Canceled'" >
+            <img *ngIf="item.stage == 'New'"  class="colors-img" src="../../assets/img/red.png"/>
+            <img class="colors-img" *ngIf="item.stage == 'InProgressx'" src="../../assets/img/orange.png"/>
+            <img class="colors-img" *ngIf="item.stage == 'Solved'" src="../../assets/img/green.png"/>
+          </ion-col>
+          <ion-col *ngIf="item.stage != 'Canceled'" class="th">{{item.stage}}</ion-col>
+          <ion-col *ngIf="item.stage != 'Canceled'" class="th">{{item.count}}</ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+      <!-- <ion-row class="cardFooter">
+        <ion-col>
+          <button class="btn">{{'tab1.Your Complaints' | translate}}</button>
+        </ion-col>
+      </ion-row> -->
+
+    </ion-card>
+    <ion-card>
+      <ion-card-header class="cardHeader">
+        <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Policies count per LOB" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.LOB" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of this.data.policy_lob" >
+          <ion-col class="th">
+            <fa-icon class="icon" *ngIf="!item.image" icon="image"></fa-icon>
+            <fa-icon class="icon" *ngIf="item.image" [icon]="item.image"></fa-icon>
+            <!-- <img src="data:image/png;base64,{{ item.icon  }}"/> -->
+          </ion-col>
+          <ion-col class="th">{{item.count}}</ion-col>
+          <ion-col class="th">{{item.amount.toFixed(0)}}</ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+      <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToPolicies()" class="btn">{{'tab1.Your Policies' | translate}}</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Claims count per LOB" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.LOB" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of this.data.claim_lob" >
+          <ion-col class="th">
+            <fa-icon class="icon" *ngIf="!item.image" icon="image"></fa-icon>
+            <fa-icon class="icon" *ngIf="item.image" [icon]="item.image"></fa-icon>
+          </ion-col>
+          <ion-col class="th">{{item.count}}</ion-col>
+          <ion-col class="th">{{item.amount.toFixed(0)}}</ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+      <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToClaims()" class="btn">{{'tab1.Your Claims' | translate}}</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+  </div>  
+  
+</ion-content>
+<ion-content *ngIf="this.shared.group == 'Surveyor'" >
+  <div class="leave-empty-div">
+    <ion-toolbar class="new-background-color">
+      <ion-buttons slot="start">
+        <ion-button (click)="back()">
+          <ion-icon style="font-size: 25px !important;" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+        
+      </ion-buttons>
+    </ion-toolbar>
+    <!-- <br/> -->
+    <div class="employee-div">
+         <!-- <div class="edit-icon">
+          <span class="custom-icon-edit-icon" ></span>
+      </div> -->
+        <div class="user-icon" *ngIf="data">
+          <ion-img *ngIf="!data.user_image"  src="../../assets/img/empty.png"></ion-img>
+          <img *ngIf="data.user_image" class=profile-pic src="data:image/png;base64,{{ data.user_image  }}">
+        </div>
+    </div>
+    <div style="margin-top: 8px;" class="employee-design">{{this.data.user.name}}</div>
+  </div>
+  <div id="tab2-img">
+  <!-- <ion-card>
     <ion-card-header class="cardHeader">
       <ion-card-title class="cardTitle">{{"tab1.Your Profile" | translate}}</ion-card-title>
     </ion-card-header>
@@ -22,211 +307,85 @@
       <span style="color: black;">{{this.data.user.mail}}</span>
       <br/>
     </ion-card-content>
-    <!-- <ion-row class="cardFooter">
-      <ion-col>
-        <button class="btn">Light</button>
-      </ion-col>
-    </ion-row> -->
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="cardHeader">
-      <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Production per LOB in EGP" | translate}}</p>
-      <br/>
-      <canvas id="pieCanvas" ></canvas>
-      
-    </ion-card-content>
-    <ion-row class="cardFooter">
-      <ion-col>
-        <button class="btn">{{'tab1.Your Policies' | translate}}</button>
-      </ion-col>
-    </ion-row>
+  </ion-card> -->
+    <ion-card>
+      <ion-card-header class="cardHeader">
+        <ion-card-title class="cardTitle">{{"tab1.Your Survey" | translate}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Insurance Application" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.LOB" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.State" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of this.data.result.insurance_app_survey.data" >
+          <ion-col class="th">
+            <fa-icon class="icon" *ngIf="!item.icon" icon="image"></fa-icon>
+            <fa-icon class="icon" *ngIf="item.icon" [icon]="item.icon"></fa-icon>
+            <!-- <img src="data:image/png;base64,{{ item.icon  }}"/> -->
+          </ion-col>
+          <ion-col class="th">{{item.state}}</ion-col>
+          <ion-col class="th">{{item.count}}</ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+      <!-- <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToPolicies()" class="btn">{{'tab1.Your Policies' | translate}}</button>
+        </ion-col>
+      </ion-row> -->
 
-  </ion-card>
-  <ion-card>
-    <!-- <ion-card-header class="cardHeader">
-      <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
-    </ion-card-header> -->
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Target Vs Production" | translate}}</p>
-      <br/>
-      <canvas id="mixed" ></canvas>
-      
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <!-- <ion-card-header class="cardHeader">
-      <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
-    </ion-card-header> -->
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Current Year Vs Last Year" | translate}}</p>
-      <br/>
-      <canvas id="currentVsLast" ></canvas>
-      
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="cardHeader">
-      <ion-card-title class="cardTitle">{{"tab1.Follow up list" | translate}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Renewals" | translate}}</p>
-      <br/>
-      <ion-row>
-        <ion-col class="th">{{"tab1.Color" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="th">
-          <img class="colors-img" src="../../assets/img/red.png"/>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Motor Claims" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.Type" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.State" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of this.data.result.motor_survey.data" >
+          <ion-col class="th">{{item.type}}</ion-col>
+          <ion-col class="th">{{item.state}}</ion-col>
+          <ion-col class="th">{{item.count}}</ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+      <!-- <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToPolicies()" class="btn">{{'tab1.Your Policies' | translate}}</button>
         </ion-col>
-        <ion-col class="th">{{this.data.renews.Red.count}}</ion-col>
-        <ion-col class="th">{{this.data.renews.Red.total.toFixed(2)}}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="th">
-          <img class="colors-img" src="../../assets/img/orange.png"/>
-        </ion-col>
-        <ion-col class="th">{{this.data.renews.Orange.count}}</ion-col>
-        <ion-col class="th">{{this.data.renews.Orange.total.toFixed(2)}}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="th">
-          <img class="colors-img" src="../../assets/img/green.png"/>
-        </ion-col>
-        <ion-col class="th">{{this.data.renews.Green.count}}</ion-col>
-        <ion-col class="th">{{this.data.renews.Green.total.toFixed(2)}}</ion-col>
-      </ion-row>
-    </ion-card-content>
-    <ion-row class="cardFooter">
-      <ion-col>
-        <button class="btn">{{'tab1.Your Renewals' | translate}}</button>
-      </ion-col>
-    </ion-row>
+      </ion-row> -->
 
-  </ion-card>
-  <ion-card>
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Permium under collection" | translate}}</p>
-      <br/>
-      <ion-row>
-        <ion-col class="th">{{"tab1.Color" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="th">
-          <img class="colors-img" src="../../assets/img/red.png"/>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="cardContent">
+        <p class="color">{{"tab1.Non-Motor Claims" | translate}}</p>
+        <br/>
+        <ion-row>
+          <ion-col class="th">{{"tab1.LOB" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.State" | translate}}</ion-col>
+          <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of this.data.result.non_motor_survey.data" >
+          <ion-col class="th">
+            <fa-icon class="icon" *ngIf="!item.icon" icon="image"></fa-icon>
+            <fa-icon class="icon" *ngIf="item.icon" [icon]="item.icon"></fa-icon>
+          </ion-col>
+          <ion-col class="th">{{item.state}}</ion-col>
+          <ion-col class="th">{{item.count}}</ion-col>
+        </ion-row>
+        
+      </ion-card-content>
+      <!-- <ion-row class="cardFooter">
+        <ion-col>
+          <button (click)="goToClaims()" class="btn">{{'tab1.Your Claims' | translate}}</button>
         </ion-col>
-        <ion-col class="th">{{this.data.collections.Red.count}}</ion-col>
-        <ion-col class="th">{{this.data.collections.Red.total.toFixed(2)}}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="th">
-          <img class="colors-img" src="../../assets/img/orange.png"/>
-        </ion-col>
-        <ion-col class="th">{{this.data.collections.Orange.count}}</ion-col>
-        <ion-col class="th">{{this.data.collections.Orange.total.toFixed(2)}}</ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="th">
-          <img class="colors-img" src="../../assets/img/green.png"/>
-        </ion-col>
-        <ion-col class="th">{{this.data.collections.Green.count}}</ion-col>
-        <ion-col class="th">{{this.data.collections.Green.total.toFixed(2)}}</ion-col>
-      </ion-row>
-      
-    </ion-card-content>
-    <ion-row class="cardFooter">
-      <ion-col>
-        <button class="btn">{{'tab1.Your Collections' | translate}}</button>
-      </ion-col>
-    </ion-row>
+      </ion-row> -->
 
-  </ion-card>
-  <ion-card>
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Complaints" | translate}}</p>
-      <br/>
-      <ion-row>
-        <ion-col class="th">{{"tab1.Color" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Stage" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
-      </ion-row>
-      <ion-row *ngFor="let item of this.data.complaint_count" >
-        <ion-col class="th" *ngIf="item.stage != 'Canceled'" >
-          <img *ngIf="item.stage == 'New'"  class="colors-img" src="../../assets/img/red.png"/>
-          <img class="colors-img" *ngIf="item.stage == 'InProgressx'" src="../../assets/img/orange.png"/>
-          <img class="colors-img" *ngIf="item.stage == 'Solved'" src="../../assets/img/green.png"/>
-        </ion-col>
-        <ion-col *ngIf="item.stage != 'Canceled'" class="th">{{item.stage}}</ion-col>
-        <ion-col *ngIf="item.stage != 'Canceled'" class="th">{{item.count}}</ion-col>
-      </ion-row>
-      
-    </ion-card-content>
-    <ion-row class="cardFooter">
-      <ion-col>
-        <button class="btn">{{'tab1.Your Complaints' | translate}}</button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-  <ion-card>
-    <ion-card-header class="cardHeader">
-      <ion-card-title class="cardTitle">{{"tab1.Your Portfolio" | translate}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Policies count per LOB" | translate}}</p>
-      <br/>
-      <ion-row>
-        <ion-col class="th">{{"tab1.LOB" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
-      </ion-row>
-      <ion-row *ngFor="let item of this.data.policy_lob" >
-        <ion-col class="th">
-          <img src="data:image/png;base64,{{ item.icon  }}"/>
-        </ion-col>
-        <ion-col class="th">{{item.count}}</ion-col>
-        <ion-col class="th">{{item.amount.toFixed(2)}}</ion-col>
-      </ion-row>
-      
-    </ion-card-content>
-    <ion-row class="cardFooter">
-      <ion-col>
-        <button class="btn">{{'tab1.Your Policies' | translate}}</button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-  <ion-card>
-    <ion-card-content class="cardContent">
-      <p class="color">{{"tab1.Claims count per LOB" | translate}}</p>
-      <br/>
-      <ion-row>
-        <ion-col class="th">{{"tab1.LOB" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Count" | translate}}</ion-col>
-        <ion-col class="th">{{"tab1.Total" | translate}}</ion-col>
-      </ion-row>
-      <ion-row *ngFor="let item of this.data.claim_lob" >
-        <ion-col class="th">
-          <img src="data:image/png;base64,{{ item.icon  }}"/>
-        </ion-col>
-        <ion-col class="th">{{item.count}}</ion-col>
-        <ion-col class="th">{{item.amount.toFixed(2)}}</ion-col>
-      </ion-row>
-      
-    </ion-card-content>
-    <ion-row class="cardFooter">
-      <ion-col>
-        <button class="btn">{{'tab1.Your Claims' | translate}}</button>
-      </ion-col>
-    </ion-row>
-
-  </ion-card>
-  
-  
+    </ion-card>
+  </div>
 </ion-content>

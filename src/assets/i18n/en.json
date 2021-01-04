@@ -38,23 +38,35 @@
         "Count" : "Count",
         "Total" : "Total",
         "Stage" : "Stage",
-        "LOB": "LOB"
+        "LOB": "LOB",
+        "Your Survey": "Your Survey",
+        "Insurance Application":"Insurance Application",
+        "Motor Claims": "Motor Claims",
+        "Non-Motor Claims":"Non-Motor Claims",
+        "State": "State",
+        "Type":"Type"
     },
     "home": {
         "title": "Arope Egypt Partner Service",
         "Welcome": "Welcome",
         "Quick Quote": "Quick Quote",
         "Insurance Application": "Insurance Application",
-        "Claims": "Claims",
+        "Claims": "Claim Applications",
         "Requests": "Requests",
         "Policy Services": "Policy Services",
-        "Sign Out": "Sign Out"
+        "Sign Out": "Sign Out",
+        "Grade": "Grade",
+        "Motor Claims Survey": "Motor Claims Survey",
+        "Non-Motor Claims Survey": "Non-Motor Claims Survey",
+        "Insurance Application Survey": "Insurance Application Survey"
+
 
     },
     "quotation-service" : {
         "Quick Quote" : "Quick Quote" ,
         "Medical" : "Medical",
         "Travel" : "Travel",
+        "Personal Accident":"Personal Accident",
         "Motor" : "Motor",
         "Zone" : "Zone",
         "Date of Birth": "Date of Birth",
@@ -65,13 +77,82 @@
         "Product": "Product",
         "Create App": "Create App",
         "Price": "Price",
-        "Sum Insured" : "Sum Insured"
+        "Sum Insured" : "Sum Insured",
+        "Job" : "Job"
 
     },
     "requests" : {
         "Endorsements": "Endorsements",
         "Cancellation": "Cancellation",
-        "Renewals": "Renewals"
+        "Renewals": "Renewals",
+        "Product": "Product",
+        "Policy Num": "Policy Num",
+        "Type": "Type",
+        "Endorsement Reason": "Endorsement Reason",
+        "Cancel Reason": "Cancel Reason",
+        "Your Request Is Submitted": "Your Request Is Submitted"
+    },
+    "claim" : {
+        "LOB": "LOB",
+        "Product": "Product",
+        "Policy Num": "Policy Num",
+        "Type": "Type",
+        "Your Claim Is Submitted": "Your Claim Is Submitted",
+        "Chasse No": "Chasse No",
+        "Service Center Network": "Service Center Network",
+        "Service Center": "Service Center",
+        "Required Documents": "Required Documents",
+        "Customer Name": "Customer Name",
+        "Customer Phone": "Customer Phone",
+        "Claim Number": "Claim Number",
+        "Claim Date": "Claim Date",
+        "Upload Invoice": "Upload Invoice",
+        "Repair Completed": "Repair Completed"
+        
+
+    },
+    "insurance-application" : {
+        "LOB": "LOB",
+        "Product": "Product",
+        "Customer Name": "Customer Name",
+        "Customer Phone": "Customer Phone",
+        "Customer Email": "Customer Email",
+        "Download Application Form": "Download App Form",
+        "Upload Application Form": "Upload Application Form",
+        "Create": "Create",
+        "Initial Offer": "Initial Offer",
+        "Final Offer": "Final Offer",
+        "Confirm Offer": "Confirm Offer",
+        "Reject Offer": "Reject Offer",
+        "Application Number": "Application Number",
+        "Application Date": "Application Date",
+        "Offer": "Offer",
+        "Accept": "Accept",
+        "Reject": "Reject",
+        "Your Application Form Is Submitted": "Your Application Form Is Submitted",
+        "Application State": "State",
+        "Survey Number": "Survey Number",
+        "Upload Survey Report" : "Upload Survey Report",
+        "Recommendation": "Recommendation",
+        "Comment": "Comment",
+        "Submit": "Submit",
+        "Survey Report": "Survey Report"
+    },
+    "profile" : {
+        "name": "Name",
+        "fra": "FRA No",
+        "exp_date": "Expiration Date",
+        "mobile": "Mobile",
+        "mail": "Email"
+    },
+    "policy" : {
+        "LOB": "LOB",
+        "Product":"Product",
+        "Policy Num":"Policy Num",
+        "Issue Date": "Issue Date",
+        "Expiry Date": "Expiry Date",
+        "Net Premium":"Net Premium",
+        "Total Premium": "Total Premium"
     },
     "sidebar" : {
         "main": "main",
@@ -200,14 +281,16 @@
         "Save": "Save"
     },
     "login": {
-        "Welcome Back": "Welcome Back",
+        "Welcome Back": "Welcome",
         "Username": "Username",
         "Username Field Is Required": "Username Field Is Required",
         "Password":"Password",
         "Password Field Must At Least 5 Leatters.": "Password Field Must At Least 5 Leatters.",
         "Sign In": "Sign In",
         "Language": "Language",
-        "CANCEL": "Cancel"
+        "CANCEL": "Cancel",
+        "Sign In as Surveyor": "Sign In as Surveyor",
+        "Sign In as Customer": "Sign In as Customer"
     },
     "collections": {
         "policy_num": "Policy Number",

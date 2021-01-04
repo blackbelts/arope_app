@@ -1,0 +1,247 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">{{"home.Claims" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="claimAppDetails" >
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{"insurance-application.Application State" | translate}}</ion-card-subtitle>
+      <ion-card-title class="color">{{claimAppDetails.state[1]}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content *ngIf="claimAppDetails.state[1] == 'Claim Intimation'" >
+      Welcome to AROPE Egypt Self Service, I am here to help you until your claim is issued. 
+      Kindly fill the claim initimation and upload the required documents below
+    </ion-card-content>
+    <ion-card-content *ngIf="claimAppDetails.state[1] != 'Claim Intimation'" >
+      {{claimAppDetails.message}}
+    </ion-card-content>
+
+  </ion-card>
+  <div *ngFor="let item of allData">
+    <ion-item *ngIf="item.name != 'Required Documents'" (click)="expandItem(item)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+        <ion-icon slot="end" name="chevron-down-circle-outline" *ngIf="!item.expanded"></ion-icon>
+        <ion-icon slot="end" item-left name="chevron-up-circle-outline" *ngIf="item.expanded"></ion-icon>
+        <ion-label [ngClass]="{'state-active': item.name == claimAppDetails.state[1] , 'state': item.name != claimAppDetails.state[1]}" class="title">{{ item.name }}</ion-label>
+    </ion-item>
+    <app-expandable [expanded]="item.expanded">
+      <ion-card *ngIf="item.name == 'Claim Intimation'" >
+        <ion-card-content>
+          <h4 class="color">{{'claim.Type' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.type}}</p>
+          <h4 class="color">{{'claim.Claim Number' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.claimNumber}}</p>
+          <h4 class="color">{{'claim.Claim Date' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.claimDate}}</p>
+          <h4 class="color">{{'claim.LOB' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.lob}}</p>
+          <h4 class="color">{{'claim.Product' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.product}}</p>
+          <h4 class="color">{{'claim.Policy Num' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.policy_num}}</p>
+          <h4 class="color">{{'claim.Customer Name' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.name}}</p>
+          <h4 class="color">{{'claim.Customer Phone' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.phone}}</p>
+          <div *ngIf="type == 'motor'" >
+            <h4 class="color">{{'claim.Chasse No' | translate }} : </h4>
+            <p style="color: rgb(174, 175, 178);">{{this.chasse_num}}</p>
+            <h4 class="color">{{'claim.Service Center Network' | translate }} : </h4>
+            <p style="color: rgb(174, 175, 178);">{{this.maintenance_centers_in_or_out}}</p>
+            <h4 *ngIf="maintenance_centers_in_or_out == 'in'"  class="color">{{'claim.Service Center' | translate }} : </h4>
+            <p *ngIf="maintenance_centers_in_or_out == 'in'" style="color: rgb(174, 175, 178);">{{this.maintenance_center}}</p>
+          </div>
+          
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card *ngIf="item.name == 'Invoicing'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+          <ion-row *ngIf="claimAppDetails.state[1] == 'Invoicing'" >
+            <ion-col class="th">
+              <ion-item *ngFor="let item of invoices" >
+                <ion-label position="stacked">{{item}}</ion-label>
+                <ion-input name="{{item}}" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="claimAppDetails.state[1] == 'Invoicing' && !shared.isInvoiceUploaded">
+            <ion-col class="th" style="text-align: center;"
+            ><ion-button (click)="uploadInvoices()" class="saveButton">{{"claim.Upload Invoice" | translate}}</ion-button>
+          </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <!-- <ion-card *ngIf="item.name == 'Pre Survey'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card> -->
+      <ion-card *ngIf="item.name == 'Start Repair'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+          <ion-row *ngIf="claimAppDetails.state[1] == 'Start Repair'">
+            <ion-col class="th" style="text-align: center;"
+            ><button (click)="repairCompleted()" class="btn">{{"Claim.Repair Completed" | translate}}</button>
+          </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <!-- <ion-card *ngIf="item.name == 'Repair Comleted'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card> -->
+      <!-- <ion-card *ngIf="item.name == 'Survey After Repair'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content> -->
+      <!-- </ion-card> -->
+      <!-- <ion-card *ngIf="item.name == 'Total Loss'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card> -->
+      <!-- <ion-card *ngIf="item.name == 'Take Cheque'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card> -->
+      <!-- <ion-card *ngIf="item.name == 'Car Release'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card> -->
+      <!-- <ion-card *ngIf="item.name == 'Survey'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card> -->
+      <!-- <ion-card *ngIf="item.name == 'Estimation'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="item.name == 'Cheque Ready'">
+        <ion-card-content>
+          <p style="color: rgb(174, 175, 178);">In This State {{item.message}}</p>
+        </ion-card-content>
+      </ion-card> -->
+      
+    </app-expandable>
+    
+</div>
+
+</ion-content>
+<ion-content *ngIf="!claimAppDetails" >
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{"insurance-application.Application State" | translate}}</ion-card-subtitle>
+      <ion-card-title class="color">Claim Initimation</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Welcome to AROPE Egypt Self Service, I am here to help you until your claim is issued. 
+      Kindly fill the claim initimation and upload the required documents below
+    </ion-card-content>
+
+  </ion-card>
+  <form  #form="ngForm" (ngSubmit)="createClaim(form)">
+    <div  *ngFor="let item of allData">
+      <ion-item (click)="expandItem(item)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+          <ion-icon slot="end" name="chevron-down-circle-outline" *ngIf="!item.expanded"></ion-icon>
+          <ion-icon slot="end" item-left name="chevron-up-circle-outline" *ngIf="item.expanded"></ion-icon>
+          <ion-label class="title">{{ item.name }}</ion-label>
+      </ion-item>
+      
+      <app-expandable [expanded]="item.expanded">
+        <ion-card *ngIf="item.name == 'Claim Intimation'" >
+          <ion-card-content style="padding: 0;">
+            <ion-grid>
+              <ion-row color="primary" justify-content-center>
+                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                  <div padding>
+                    <ion-item>
+                      <ion-label position="stacked">{{ 'claim.Type' | translate }}</ion-label>
+                      <ion-select  required name="type" ngModel (ionChange)="typeChanged(form)">
+                        <ion-select-option *ngFor="let type of types" [value]="type.value">{{ type.name }}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label position="stacked">{{ 'claim.Product' | translate }}</ion-label>
+                      <ion-select  required name="product" ngModel>
+                        <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label position="stacked">{{ 'claim.Policy Num' | translate }}</ion-label>
+                      <ion-input  name="policy" type="text" ngModel required></ion-input>
+                    </ion-item>
+                    <div *ngIf="type == 'motor'">
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'claim.Chasse No' | translate }}</ion-label>
+                        <ion-input name="chasse_no" type="text" ngModel required></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'claim.Service Center Network' | translate }}</ion-label>
+                        <ion-select  required name="inOrOut" ngModel (ionChange)="networkChanged(form)">
+                          <ion-select-option *ngFor="let center of centersNetwork" [value]="center.value">{{ center.name }}</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-item *ngIf="isIn == 'in'" >
+                        <ion-label position="stacked">{{ 'claim.Service Center' | translate }}</ion-label>
+                        <ion-select  required name="center" ngModel>
+                          <ion-select-option *ngFor="let center of centers" [value]="center.id">{{ center.name }}</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="item.name == 'Required Documents'" >
+          <ion-card-content style="padding: 0;">
+            <ion-grid>
+              <ion-row color="primary" justify-content-center>
+                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                  <div padding *ngIf="type == 'motor'" >
+                    <ion-item *ngFor="let item of motorDocuments" >
+                      <ion-label position="stacked">{{item}}</ion-label>
+                      <ion-input name="{{item}}" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+                    </ion-item>
+                  </div>
+                  <div padding *ngIf="type == 'non-motor'">
+                    <ion-item *ngFor="let item of nonMotorDocuments" >
+                      <ion-label position="stacked">{{item}}</ion-label>
+                      <ion-input name="{{item}}" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
+      </app-expandable>
+    </div>
+    <div padding>
+      <ion-row>
+        <ion-col  class="ion-text-center">
+          <ion-button class="saveButton" expand="full" size="small" type="submit" [disabled]="form.invalid">
+            <ion-icon slot="start" name="checkmark"></ion-icon>
+            {{ 'insurance-application.Create' | translate }}
+          </ion-button>
+        </ion-col>
+        
+      </ion-row>
+    </div>
+  </form>
+</ion-content>

@@ -38,22 +38,33 @@
         "Count" : "العدد",
         "Total" : "الإجمالى" ,
         "Stage" : "المرحلة",
-        "LOB": "نوع التأمين"
+        "LOB": "نوع التأمين",
+        "Your Survey": "معايناتك",
+        "Insurance Applications": "طلبات تأمين",
+        "Motor Claims": "تعويضات السيارات",
+        "Non-Motor Claims":"التعويضات",
+        "State": "الحالة",
+        "Type":"النوع"
     },
     "home": {
         "title": "خدمة شركاء آروب مصر",
         "Welcome": "اهلا بك",
         "Quick Quote": "عرض سعر",
         "Insurance Application": "طلب تأمين",
-        "Claims": "التعويضات",
+        "Claims": "طلبات التعويض",
         "Requests": "الطلبات",
         "Policy Services": "خدمات الوثائق",
-        "Sign Out": "تسجيل الخروج"
+        "Sign Out": "تسجيل الخروج",
+        "Grade": "الرتبة",
+        "Motor Claims Survey": "معاينة تعويضات السيارات",
+        "Non-Motor Claims Survey": "معاينة التعويضات",
+        "Insurance Application Survey": "معاينة طلبات التأمين"
     },
     "quotation-service" : {
         "Quick Quote" : "عرض سعر" ,
         "Medical" : "'طبى'",
         "Travel" : "سفر",
+        "Personal Accident":"الحوداث الشخصية",
         "Motor" : "سيارات",
         "Zone" : "التغطية التأمينية تشمل المنطقة",
         "Date of Birth": "تاريخ الميلاد",
@@ -64,12 +75,79 @@
         "Product" : "المنتج",
         "Create App": "إنشاء طلب تأمينى",
         "Price": "السعر",
-        "Sum Insured" : "لمبلغ التأمينى"
+        "Sum Insured" : "المبلغ التأمينى",
+        "Job" : "الوظيفة"
+    },
+    "insurance-application" : {
+        "LOB": "نوع التأمين",
+        "Product": "المنتج التأمينى",
+        "Customer Name": "اسم العميل",
+        "Customer Phone": "تليفون العميل",
+        "Customer Email": "البريد الإلكترونى للعميل",
+        "Download Application Form": "تحميل طلب التأمين",
+        "Upload Application Form": "رفع طلب التأمين",
+        "Create": "إنشاء",
+        "Initial Offer": "العرض الأولى",
+        "Final Offer": "العرض النهائى",
+        "Confirm Offer": "الموافقة على العرض",
+        "Reject Offer": "رفض العرض",
+        "Application Number": "رقم الطلب",
+        "Application Date": "تاريخ الطلب",
+        "Offer": "العرض",
+        "Accept": "موافقة",
+        "Reject": "رفض",
+        "Your Application Form Is Submitted": "تم إنشاء طلب التأمين",
+        "Upload Invoice": "رفع الفاتورة",
+        "Repair Completed": "تم التصليح",
+        "Application State": "حالة الطلب",
+        "Survey Number": "رقم المعاينة",
+        "Upload Survey Report" : "رفع تقرير المعاينة",
+        "Recommendation": "التوصية",
+        "Comment": "تعليق",
+        "Submit": "إرسال",
+        "Survey Report": "تقرير المعاينة"
     },
     "requests" : {
         "Endorsements": "الملاحق",
         "Cancellation": "الالغاء",
-        "Renewals": "التجديد"
+        "Renewals": "التجديد",
+        "Product": "المنتج التأمينى",
+        "Policy Num": "رقم الوثيقة",
+        "Type": "نوع الطلب",
+        "Endorsement Reason": "سبب الملحق",
+        "Cancel Reason": "سبب الالغاء",
+        "Your Request Is Submitted": "تم إنشاء الطلب"
+    },
+    "claim" : {
+        "LOB":"نوع التأمين",
+        "Product": "المنتج التأمينى",
+        "Policy Num": "رقم الوثيقة",
+        "Type": "النوع",
+        "Your Claim Is Submitted": "تم إنشاء التعويض",
+        "Chasse No": "رقم الشاسيه",
+        "Service Center Network": "شبكة مراكز الصيانة",
+        "Service Center": "مركز صيانة",
+        "Required Documents": "الملفات المطلوبة",
+        "Customer Name": "اسم العميل",
+        "Customer Phone": "رقم تليفون العميل",
+        "Claim Number": "رقم الطلب",
+        "Claim Date": "تاريخ الطلب"
+    },
+    "profile" : {
+        "name": "الإسم",
+        "fra": "رقم التسجيل بالهيئة",
+        "exp_date": "تاريخ إنتهاء الرخصة",
+        "mobile": "رقم الموبايل",
+        "mail": "البريد الإلكترونى"
+    },
+    "policy" : {
+        "LOB":"نوع التأمين",
+        "Product":"المنتج التأمينى",
+        "Policy Num":"رقم الوثيقة",
+        "Issue Date": "تاريخ بدء الوثيقة",
+        "Expiry Date": "تاريخ الإنتهاء",
+        "Net Premium": "صافى القسط",
+        "Total Premium": "إجمالى القسط "
     },
     "sidebar" : {
         "main": "الأساسية",
@@ -206,7 +284,9 @@
         "Password Field Must At Least 5 Leatters.": "حقل كلمة السر يجب ان يحتوى على الاقل 5 حروف",
         "Sign In": "تسجيل دخول",
         "Language": "اللغة",
-        "CANCEL": "الغاء"
+        "CANCEL": "الغاء",
+        "Sign In as Surveyor": "تسجيل الدخول كمعاين",
+        "Sign In as Customer": "تسجيل الدخول كعميل"
     },
     "collections": {
         "policy_num": "رقم البوليصة",

@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { SharedService } from './../services/shared.service';
 import { OdooApiService } from './../services/odoo-api.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,11 +13,11 @@ export class RequestsPage implements OnInit {
   public data: any;
   public searchTerm: string = "";
   filterdData: any;
-  constructor(public odooApi: OdooApiService,private router: Router, public shared: SharedService) {
+  constructor(public odooApi: OdooApiService,private router: Router, public shared: SharedService, public navCtrl: NavController) {
     this.odooApi.callOdooMethod('arope.broker', 'get_requests',
     {filter: this.shared.userId}).then(res => {
       this.data = res['data'];
-      console.log(this.data)
+      console.log(this.data);
       this.setFilteredItems();
     });
    }
@@ -32,6 +33,9 @@ export class RequestsPage implements OnInit {
   }
   setFilteredItems() {
     this.filterdData = this.filterItems(this.searchTerm);
+  }
+  createRequest(){
+    this.navCtrl.navigateForward('create-request')
   }
 
 }

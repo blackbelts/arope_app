@@ -1,0 +1,25 @@
+.new-background-color{
+    --background: #073e89!important;
+    --color: white;
+    --font-size: 14px;
+  }
+  .color{
+        
+    color: #073e89 !important;
+    
+  }
+  .my-custom-class .popover-wrapper.sc-ion-popover-md .popover-content.sc-ion-popover-md {
+    top: 64px !important;
+    left: 65px !important;
+  }
+  ion-label > h3 {
+    color: #080808;
+  }
+  ion-label > p {
+    color: #383838;
+    font-size: 12px;
+  }
+  ion-card {
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,.3);
+  
+  }

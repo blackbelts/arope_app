@@ -1,0 +1,24 @@
+.new-background-color{
+    --background: #073e89!important;
+    --color: white;
+    --font-size: 14px;
+  }
+  .icon {
+    font-size: 20px;
+    color: #e77a11;
+}
+ion-avatar {
+  height: 20px !important;
+  width: 25px !important;
+}
+ion-label > h3 {
+  color: #080808;
+}
+ion-label > p {
+  color: #383838;
+  font-size: 12px;
+}
+ion-card {
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,.3);
+
+}

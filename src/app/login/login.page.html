@@ -17,64 +17,83 @@
 
       <ion-toolbar>
 
-        <ion-title>
+        <!-- <ion-title> -->
           <ion-img src="assets/img/logo.png" ></ion-img>
-        </ion-title>
+        <!-- </ion-title> -->
       </ion-toolbar>
 
+    <div style="margin-top: 80px;" *ngIf="this.group != 'Surveyor'">
+      <form   #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <ion-grid size.sm="6" offset.sm="3">
+          <!-- <ion-row>
+            <ion-col>
+              <h1 class="m-b-30">
+                {{ 'login.Welcome Back' | translate }}
+              </h1>
+            </ion-col>
+          </ion-row> -->
+          <ion-row>
+            <ion-col>
+              <ion-item  class="m-b-20">
+                <ion-label position="floating">
+                  {{ 'login.Username' | translate }}
+                </ion-label>
+                <ion-input  type="name" ngModel name="username" required  #username="ngModel"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!username.valid && username.touched" lines="none">
+                <ion-text color="danger">
+                  {{ 'login.Username Field Is Required' | translate }}
+                </ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">
+                  {{ "login.Password" | translate }}
+                </ion-label>
+                <ion-input type="password" ngModel name="password" required  #password="ngModel"></ion-input>
+              </ion-item>
+              <!-- <ion-item *ngIf="!password.valid && password.touched" lines="none">
+                <ion-text color="danger">
+                  {{ 'login.Password Field Must At Least 5 Leatters.' | translate }}
+                </ion-text>
+              </ion-item> -->
+            </ion-col>
+          </ion-row>
 
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-      <ion-grid size.sm="6" offset.sm="3">
-        <ion-row>
-          <ion-col>
-            <h1 class="m-b-30">
-              {{ 'login.Welcome Back' | translate }}
-            </h1>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item  class="m-b-20">
-              <ion-label position="floating">
-                {{ 'login.Username' | translate }}
-              </ion-label>
-              <ion-input  type="name" ngModel name="username" required  #username="ngModel"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!username.valid && username.touched" lines="none">
-              <ion-text color="danger">
-                {{ 'login.Username Field Is Required' | translate }}
-              </ion-text>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">
-                {{ "login.Password" | translate }}
-              </ion-label>
-              <ion-input type="password" ngModel name="password" required  #password="ngModel"></ion-input>
-            </ion-item>
-            <!-- <ion-item *ngIf="!password.valid && password.touched" lines="none">
-              <ion-text color="danger">
-                {{ 'login.Password Field Must At Least 5 Leatters.' | translate }}
-              </ion-text>
-            </ion-item> -->
-          </ion-col>
-        </ion-row>
+          <ion-row style="margin-top: 30px;">
+            <ion-col class="m-t-20">
+              <!-- <ion-button *ngIf="!isLoggin" type="button" color="primary" expand="block" [disabled]="f.invalid">Register</ion-button> -->
+              <ion-button type="submit" color="primary" expand="block" [disabled]="f.invalid">
+                
+                {{ 'login.Sign In' | translate }}
+                <!-- Sign In -->
+              </ion-button>
+              <!-- <ion-button type="submit" color="primary" expand="block">Sign In</ion-button> -->
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col class="m-t-20">
-            <!-- <ion-button *ngIf="!isLoggin" type="button" color="primary" expand="block" [disabled]="f.invalid">Register</ion-button> -->
-            <ion-button type="submit" color="primary" expand="block" [disabled]="f.invalid">
-              
-              {{ 'login.Sign In' | translate }}
-              <!-- Sign In -->
-            </ion-button>
-            <!-- <ion-button type="submit" color="primary" expand="block">Sign In</ion-button> -->
-          </ion-col>
-        </ion-row>
-
-      </ion-grid>
+        </ion-grid>
 
 
-    </form>
+      </form>
+    </div>
+    <div style="margin-top: 80px;" *ngIf="this.group == 'Surveyor'">
+      <ion-row  >
+        <ion-col class="m-t-20">
+          <ion-button type="submit" color="primary" expand="block" (click)="surveyorSignIn()">
+            
+            {{ 'login.Sign In as Surveyor' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="m-t-20">
+          <ion-button type="submit" color="primary" expand="block" (click)="customerSignIn()">
+            
+            {{ 'login.Sign In as Customer' | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
   </div>
 </div>
 

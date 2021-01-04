@@ -1,3 +1,4 @@
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { RequestsPage } from './requests.page';
     FormsModule,
     IonicModule,
     RequestsPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    FontAwesomeModule
   ],
   declarations: [RequestsPage]
 })

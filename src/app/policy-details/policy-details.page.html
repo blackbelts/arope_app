@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/policy"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="pop" (click)="handleButtonClick()">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="small">{{"home.Policy Services" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-card>
+    <ion-card-content>
+          
+      <h4 class="color">{{'policy.LOB' | translate }}</h4>
+      <p *ngIf="policyDetails"  style="color: #383838;">{{this.policyDetails.lob}}</p>
+    
+      <h4 class="color">{{'policy.Product' | translate }}</h4>
+      <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.product}}</p>
+      <h4 class="color">{{'policy.Policy Num' | translate }}</h4>
+      <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.policy_num}}</p>
+      <h4 class="color">{{'policy.Issue Date' | translate }}</h4>
+      <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.issue_date}}</p>
+      <h4 class="color">{{'policy.Expiry Date' | translate }}</h4>
+      <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.expiry_date}}</p>
+      <h4 class="color">{{'policy.Net Premium' | translate }}</h4>
+      <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.net_premium}}</p>
+      <h4 class="color">{{'policy.Total Premium' | translate }}</h4>
+      <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.totoal_premium}}</p>
+      
+    </ion-card-content>
+  </ion-card> -->
+  <ion-card>
+    <ion-item>
+      <ion-label>
+        <h3>{{'policy.LOB' | translate }}</h3>
+        <p *ngIf="policyDetails"  style="color: #383838;">{{this.policyDetails.lob}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>{{'policy.Product' | translate }}</h3>
+        <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.product}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>{{'policy.Policy Num' | translate }}</h3>
+        <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.policy_num}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>{{'policy.Issue Date' | translate }}</h3>
+        <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.issue_date}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>{{'policy.Expiry Date' | translate }}</h3>
+        <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.expiry_date}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>{{'policy.Net Premium' | translate }}</h3>
+        <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.net_premium}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>{{'policy.Total Premium' | translate }}</h3>
+        <p *ngIf="policyDetails" style="color: #383838;">{{this.policyDetails.totoal_premium}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

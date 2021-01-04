@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">{{"home.Claims" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form  #form="ngForm" (ngSubmit)="createClaim(form)" *ngIf="!isCreated">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+            <ion-item>
+              <ion-label position="floating">{{ 'claim.Type' | translate }}</ion-label>
+              <ion-select  required name="type" ngModel (ionChange)="typeChanged(form)">
+                <ion-select-option *ngFor="let type of types" [value]="type.value">{{ type.name }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">{{ 'claim.Product' | translate }}</ion-label>
+              <ion-select  required name="product" ngModel>
+                <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">{{ 'claim.Policy Num' | translate }}</ion-label>
+              <ion-input  name="policy" type="text" ngModel required></ion-input>
+            </ion-item>
+            <div *ngIf="type == 'motor'">
+              <ion-item>
+                <ion-label position="floating">{{ 'claim.Chasse No' | translate }}</ion-label>
+                <ion-input name="chasse_no" type="text" ngModel required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">{{ 'claim.Service Center Network' | translate }}</ion-label>
+                <ion-select  required name="inOrOut" ngModel (ionChange)="networkChanged(form)">
+                  <ion-select-option *ngFor="let center of centersNetwork" [value]="center.value">{{ center.name }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="isIn == 'in'" >
+                <ion-label position="floating">{{ 'claim.Service Center' | translate }}</ion-label>
+                <ion-select  required name="center" ngModel>
+                  <ion-select-option *ngFor="let center of centers" [value]="center.id">{{ center.name }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <h4>{{'claim.Required Documents' | translate}}</h4>
+              <ion-item *ngFor="let item of motorDocuments" >
+                <ion-label position="stacked">{{item}}</ion-label>
+                <ion-input name="{{item}}" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+              </ion-item>
+            </div>
+            <div *ngIf="type == 'non-motor'" >
+              <h4>{{'claim.Required Documents' | translate}}</h4>
+              <ion-item *ngFor="let item of nonMotorDocuments" >
+                <ion-label position="stacked">{{item}}</ion-label>
+                <ion-input name="{{item}}" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+              </ion-item>
+            </div>
+            
+          </div>
+          <div padding>
+            <!-- Icons -->
+            <ion-row>
+              <ion-col  class="ion-text-center">
+                <ion-button class="saveButton" expand="full" size="small" type="submit" [disabled]="form.invalid">
+                  <ion-icon slot="start" name="checkmark"></ion-icon>
+                  {{ 'insurance-application.Create' | translate }}
+                </ion-button>
+              </ion-col>
+              <!-- <ion-col class="ion-text-center">
+                <ion-button class="discardButton" expand="full" size="small">
+                  <ion-icon slot="start" name="close"></ion-icon>
+                  Discard
+                </ion-button>
+              </ion-col> -->
+            </ion-row>
+            <!-- <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button> -->
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-card *ngIf="isCreated" >
+    <ion-card-content>
+      <p>{{"claim.Your Claim Is Submitted" | translate}}</p>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

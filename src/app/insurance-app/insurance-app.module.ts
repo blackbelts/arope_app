@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { InsuranceAppPageRoutingModule } from './insurance-app-routing.module';
 
@@ -15,7 +16,8 @@ import { InsuranceAppPage } from './insurance-app.page';
     FormsModule,
     IonicModule,
     InsuranceAppPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    FontAwesomeModule
   ],
   declarations: [InsuranceAppPage]
 })

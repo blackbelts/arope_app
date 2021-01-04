@@ -9,6 +9,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./quotation-service.page.scss'],
 })
 export class QuotationServicePage implements OnInit {
+  jobs;
+  basicCovers;
+  optionalCovers;
+  isDeath = false;
   zones: any[] = [
     {
       value: 'zone 1', viewValue: 'Worldwide excluding USA & CANADA'
@@ -29,8 +33,9 @@ export class QuotationServicePage implements OnInit {
   products: any [] = [];
   coverageTo: any;
   newDate;
-  price: any;
+  price: any ;
   quote_id: any;
+  lob: any;
   constructor(public odooApi: OdooApiService, public router: Router) {
     const data = { data: [] } ;
     this.odooApi.callOdooMethod(
@@ -38,26 +43,40 @@ export class QuotationServicePage implements OnInit {
         this.periods = res['data'];
         console.log('periods', res['data']);
       });
-      this.odooApi.callOdooMethod(
-        'insurance.product', 'search_read', { filter: ["&", ["active_online", "=", "true"], ["line_of_bus.line_of_business", "=", "Travel"]] } ).then(res => {
-          const lang = localStorage.getItem('lang');
-          console.log(lang);
-          console.log(res);
-          for (const product of res['data']) {
-            console.log(product);
-          if (lang === 'ar') {
-            this.products.push({
-              id: product.id,
-              name: product.ar_product_name,
-            });
-          } else if (lang === 'en') {
-            this.products.push({
-              id: product.id,
-              name: product.product_name,
-            });
-          }
+    
+    this.odooApi.callOdooMethod(
+      'insurance.product', 'search_read', { filter: ["&", ["active_online", "=", "true"], ["line_of_bus.line_of_business", "=", "Travel"]] } ).then(res => {
+        const lang = localStorage.getItem('lang');
+        console.log(lang);
+        console.log(res);
+        for (const product of res['data']) {
+          console.log(product);
+        if (lang === 'ar') {
+          this.products.push({
+            id: product.id,
+            name: product.ar_product_name,
+          });
+        } else if (lang === 'en') {
+          this.products.push({
+            id: product.id,
+            name: product.product_name,
+          });
         }
-      });
+      }
+    });
+    this.odooApi.callOdooMethod('job.table', 'search_read', {filter: [],
+      need: []}).then(res => {
+        this.jobs = res;
+    });
+    this.odooApi.callOdooMethod('cover.table', 'search_read', {filter: [['basic', '=', true]],
+      need: []}).then(res => {
+        this.basicCovers = res;
+    });
+    this.odooApi.callOdooMethod('cover.table', 'search_read', {filter: [['basic', '=', false]],
+      need: []}).then(res => {
+        this.optionalCovers = res;
+    });
+
     
   }
 
@@ -89,6 +108,7 @@ export class QuotationServicePage implements OnInit {
         console.log(res);
         this.price = res['data']['price'];
         this.quote_id = res['data']['id'];
+        this.lob = res['data']['lob'];
       });
     
   }
@@ -166,10 +186,11 @@ export class QuotationServicePage implements OnInit {
   create_app(){
     let navigationExtras = {
       queryParams: {
-        id: JSON.stringify(this.quote_id)
+        quote_id: JSON.stringify(this.quote_id),
+        lob: JSON.stringify(this.lob)
 
       }
     };
-    this.router.navigate(['create-insurance-app'], navigationExtras);
+    this.router.navigate(['insurance-app-details'], navigationExtras);
   }
 }

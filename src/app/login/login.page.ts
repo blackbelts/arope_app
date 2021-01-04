@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
   public frmData: any;
   selectedLanguage: any;
   languages: any;
+  group:any;
   constructor(
     public navCtrl: NavController,
     private router: Router,
@@ -26,6 +27,7 @@ export class LoginPage implements OnInit {
       this.selectedLanguage = this.languageService.getDefaultLanguage();
       this.languages = this.languageService.getLanguages();
       this.frmData = { email: '', password: '' };
+      this.group = localStorage.getItem('group');
   }
 
   ngOnInit() {
@@ -43,11 +45,59 @@ export class LoginPage implements OnInit {
       localStorage.setItem("token", user.token);
       localStorage.setItem("user_id", user.user.id);
       this.odooApi.updateToken();
-      this.router.navigateByUrl('main/tabs');
+      this.odooApi.callOdooMethod('arope.broker', 'get_user_groups', 
+        {data: user.user.id}).then(res => {
+          console.log(res['data']['groups'])
+          if (res['data']['groups'].includes('Broker')){
+            localStorage.setItem("group", 'Broker');
+            this.odooApi.callOdooMethod('arope.broker', 'get_broker_dashboard',
+            {data: Number(localStorage.getItem('user_id'))}).then(res => {
+              // console.log(res.data);
+              // this.data = res['data'];
+              this.shared.dashboardData = res['data'];
+            });
+            this.group = 'Broker';
+            this.shared.group = 'Broker';
+            this.router.navigateByUrl('tab2');
+          } else if (res['data']['groups'].includes('Surveyor')){
+            this.group = 'Surveyor';
+            this.shared.group = 'Surveyor';
+            this.odooApi.callOdooMethod('arope.broker', 'surveyor_dashboard',
+            {data: Number(localStorage.getItem('user_id'))}).then(res => {
+              // console.log(res.data);
+              // this.data = res['data'];
+              this.shared.dashboardData = res['data'];
+              console.log(res['data']);
+            });
+          } else {
+            this.odooApi.callOdooMethod('arope.broker', 'get_broker_dashboard',
+            {data: Number(localStorage.getItem('user_id'))}).then(res => {
+              // console.log(res.data);
+              // this.data = res['data'];
+              this.shared.dashboardData = res['data'];
+            });
+            this.group = 'Customer';
+            this.shared.group = 'Customer';
+            this.router.navigateByUrl('tab2');
+          }
+      });
+      
+      
+      
     });
   }
   languageChanged(){
     this.languageService.setLanguage(this.selectedLanguage);
+  }
+  surveyorSignIn(){
+    localStorage.setItem("group", 'Surveyor');
+    this.shared.group = 'Surveyor';
+    this.router.navigateByUrl('tab2');
+  }
+  customerSignIn(){
+    localStorage.setItem("group", 'Customer');
+    this.shared.group = 'Customer';
+    this.router.navigateByUrl('tab2');
   }
 
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SharedService } from './shared.service';
 import { HttpClient } from '@angular/common/http';
-import { ToastController } from '@ionic/angular';
+// import { ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 
 @Injectable({
@@ -15,10 +16,13 @@ export class OdooApiService {
   odooUrl = "http://207.154.195.214";
   odooPort = 7070;
   odooDBName = "arope-space01";
+  private loader: any;
   constructor(
     public shared: SharedService,
     public http: HttpClient,
-    private toastController: ToastController,
+    public alertCtrl: AlertController,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
     ) {
     }
     login(username,password) {
@@ -82,10 +86,24 @@ export class OdooApiService {
   }
 
   async presentToast(msg) {
-    const toast = await this.toastController.create({
+    const toast = await this.toastCtrl.create({
       message: msg,
       duration: 2000
     });
     toast.present();
+  }
+  downloadApplicationFile(id) {
+    const url = this.odooUrl + ":" + this.odooPort + "/web/content/" + id.toString() + "?download=true"
+    return new Promise((resolve, reject) => {
+      this.http.get(url)
+    })
+    
+  }
+  async showLoading() {
+    this.loader = await this.loadingCtrl.create();
+    this.loader.present();
+  }
+  hideLoading() {
+    this.loader.dismiss();
   }
 }

@@ -34,7 +34,21 @@ export class InsuranceAppPage implements OnInit {
   }
 
   createApp(){
-    this.navCtrl.navigateForward('create-insurance-app')
+    this.navCtrl.navigateForward('insurance-app-details')
+  }
+  goToDetails(item){
+    let navigationExtras = {
+      queryParams: item
+    };
+    this.router.navigate(['insurance-app-details'], navigationExtras);
+  }
+  ionViewWillEnter() {
+    this.odooApi.callOdooMethod('arope.broker', 'get_insurance_apps',
+    {data: this.shared.userId}).then(res => {
+      this.data = res['data'];
+      console.log(this.data)
+      this.setFilteredItems();
+    });
   }
 
 }

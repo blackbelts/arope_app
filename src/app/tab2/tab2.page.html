@@ -1,36 +1,175 @@
+<!-- <ion-header >
+  <ion-toolbar class="blues-nav">
+      <ion-buttons slot="start" class="nav-content">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <div class="notification-div">
+          <ion-icon ios="ios-more" md="md-more"  class="notificationIcon nav-content optn-btn">
+          </ion-icon>
+      </div>
+  </ion-toolbar>
+</ion-header> -->
 <ion-content padding >
-
+  <div class="leave-empty-div">
+    <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-button class="pop" (click)="handleButtonClick()">
+        <ion-icon style="color: white !important;" slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button> 
+       
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToProfile()" class="pop">
+        <ion-icon style="color: white !important;" slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+    <!-- <br/> -->
+    <div class="employee-div">
+         <!-- <div class="edit-icon">
+          <span class="custom-icon-edit-icon" ></span>
+      </div> -->
+        <div class="user-icon" *ngIf="data">
+          <ion-img *ngIf="!data.user_image"  src="../../assets/img/empty.png"></ion-img>
+          <img *ngIf="data.user_image" class=profile-pic src="data:image/png;base64,{{ data.user_image  }}">
+        </div>
+    </div>
+    <div class="employee-name">{{'home.Welcome' | translate}}</div>
+    <div class="employee-design">{{name}}</div>
+  </div>
 
   <div id="tab2-img">
-    <div class="overlay">
-      <ion-list no-lines>
+    <div class="overlay" *ngIf="this.shared.group == 'Broker' || this.shared.group == 'Customer'" >
+      <!-- <ion-list no-lines>
         <ion-item class="back">
-          <ion-label style="color: #073e89 !important;" >{{'login.Language' | translate }}</ion-label>
-          <ion-select  style="color: #073e89 !important;" [(ngModel)]="selectedLanguage" (ionChange)='languageChanged()' [cancelText]="'login.CANCEL' | translate">
-            <ion-select-option style="color: #073e89 !important;" *ngFor="let item of languages" [value]="item.code">{{item.code}}</ion-select-option>
+          <ion-label style="color: white !important;" >{{'login.Language' | translate }}</ion-label>
+          <ion-select  style="color: white !important;" [(ngModel)]="selectedLanguage" (ionChange)='languageChanged()' [cancelText]="'login.CANCEL' | translate">
+            <ion-select-option style="color: white !important;" *ngFor="let item of languages" [value]="item.code">{{item.code}}</ion-select-option>
           </ion-select>
         </ion-item>
-      </ion-list>
-      <ion-toolbar>
-        <ion-title>
-          <ion-img *ngIf="data"  src="data:image/png;base64,{{ data.user_image  }}"></ion-img>
-        </ion-title>
+      </ion-list> -->
+      <!-- <ion-toolbar class="headerImage">
+        <ion-title *ngIf="data" > -->
+          <!-- <ion-img src="../../assets/img/header.jpg"></ion-img> -->
+          <!-- <ion-img *ngIf="!data.user_image"  src="../../assets/img/empty.png"></ion-img>
+          <ion-img *ngIf="data.user_image"  src="data:image/png;base64,{{ data.user_image  }}"></ion-img> 
+         </ion-title>
       </ion-toolbar>
       <div class="clearfix"></div>
   
-      <h2 text-center>
-       <small>{{'home.title' | translate}}</small>
+      <h2 text-center *ngIf="name"> -->
+       <!-- <small style="font-size: 18px;color: #080808 !important;" >{{'home.Welcome' | translate}} </small>
+       <br/> -->
+       <!-- <small style="font-size: 11px;color: #383838 !important;">{{name}}</small>
 
-      </h2>
-      <ul class="wizard o_partner_dashboard_wizard d-flex mt32 mb32">
-                                        
-        <li class="o_partner_dashboard_grade_active_ready">Ready Partner <span class="chevron"></span></li>
-        <li class="pl-3 ">Silver Partner <span class="chevron"></span></li>
-        <li class="">Gold Partner</li>
-    
-      </ul>
-      <ion-row>
+      </h2> -->
+      <!-- <h2 *ngIf="this.shared.group == 'Broker' || this.shared.group == 'Customer'"  text-center>
+        <ion-chip color="primary">
+          <ion-label style="color: #073e89 !important;">Blue Partner</ion-label>
+        </ion-chip>
+       </h2> -->
+       <ion-card (click)="goToDashboard()">
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="tachometer-alt"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'tabs.Dashboard' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <!-- <ion-card>
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="user"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'tabs.Profile' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card> -->
+       <ion-card (click)="goToQuotationService()">
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="hand-holding-usd"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Quick Quote' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <ion-card (click)="goToInsuranceApps()">
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="handshake"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Insurance Application' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <ion-card (click)="goToClaims()">
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="bullhorn"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Claims' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <!-- <ion-card>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-icon name="bag-add-outline" ></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Requests' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>-->
+       <ion-card (click)="goToPolicyService()">  
 
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="headset"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Policy Services' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <!-- <ion-card>
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="palette"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'tabs.Dashboard' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card> -->
+      <!-- <ion-row *ngIf="this.shared.group == 'Broker' || this.shared.group == 'Customer'">
+        <ion-col (click)="goToDashboard()">
+          <div>
+            <fa-icon class="icon" icon="palette"></fa-icon>
+            <p class="color">{{'tabs.Dashboard' | translate}}</p>
+          </div>
+        </ion-col>
+        <ion-col (click)="goToProfile()">
+          <div>
+            <ion-icon name="person" ></ion-icon>
+            <p class="color">{{'tabs.Profile' | translate}}</p>
+          </div>
+        </ion-col>
         <ion-col (click)="goToQuotationService()">
           <div>
             <ion-icon name="cash" ></ion-icon>
@@ -44,7 +183,7 @@
           </div>
         </ion-col>
     
-        <ion-col>
+        <ion-col (click)="goToClaims()">
             <div>
               <ion-icon name="logo-usd" ></ion-icon>
               <p class="color">{{'home.Claims' | translate}}</p>
@@ -52,21 +191,21 @@
         </ion-col>
         <ion-col (click)="goToRequests()">
             <div>
-              <ion-icon name="bag-add" ></ion-icon>
+              <ion-icon name="bag-add" ></ion-icon> -->
               <!-- <i class="fas fa-hand-holding-usd new"></i> -->
               <!-- <ion-icon name="cart" ></ion-icon> -->
-              <p class="color">{{'home.Requests' | translate}}</p>
+              <!-- <p class="color">{{'home.Requests' | translate}}</p>
             </div>
-        </ion-col>
+        </ion-col> -->
         <!-- <ion-col (click)="gotosurrenders(profile)"> -->
-        <ion-col>
+        <!-- <ion-col (click)="goToPolicyService()">
             <div>
               <ion-icon name="document" ></ion-icon>
               <p class="color">{{'home.Policy Services' | translate}}</p>
             </div>
         </ion-col>
         
-        <ion-col>
+        <ion-col (click)="logout()">
           <div>
             <ion-icon name="log-out" ></ion-icon>
             <p class="color">{{'home.Sign Out' | translate}}</p>
@@ -74,6 +213,93 @@
       </ion-col>
     
       </ion-row>
+      <ion-row style="margin-top: 120px;" *ngIf="this.shared.group == 'Surveyor'">
+        <ion-col (click)="goToDashboard()">
+          <div>
+            <fa-icon class="icon" icon="palette"></fa-icon>
+            <p class="color">{{'tabs.Dashboard' | translate}}</p>
+          </div>
+        </ion-col>
+        <ion-col (click)="goToProfile()">
+          <div>
+            <ion-icon name="person" ></ion-icon>
+            <p class="color">{{'tabs.Profile' | translate}}</p>
+          </div>
+        </ion-col>
+        <ion-col (click)="goToInsuranceAppSurvey()">
+          <div>
+            <ion-icon name="heart" ></ion-icon>
+            <p class="color">{{'home.Insurance Application Survey' | translate}}</p>
+          </div>
+        </ion-col>
+        <ion-col (click)="goToMotorClaimSurvey()">
+          <div>
+            <fa-icon class="icon" icon="car"></fa-icon>
+            <p class="color">{{'home.Motor Claims Survey' | translate}}</p>
+          </div>
+        </ion-col>
+        <ion-col (click)="goToNonMotorClaimSurvey()">
+          <div>
+            <fa-icon class="icon" icon="user-edit"></fa-icon>
+            <p class="color">{{'home.Non-Motor Claims Survey' | translate}}</p>
+          </div>
+        </ion-col>
+        
+        
+        <ion-col (click)="logout()">
+          <div>
+            <ion-icon name="log-out" ></ion-icon>
+            <p class="color">{{'home.Sign Out' | translate}}</p>
+          </div>
+      </ion-col>
+    
+      </ion-row> -->
+    </div>
+    <div class="overlay" *ngIf="this.shared.group == 'Surveyor'" >
+      <ion-card (click)="goToDashboard()">  
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="tachometer-alt"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'tabs.Dashboard' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <ion-card (click)="goToInsuranceAppSurvey()">  
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="handshake"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Insurance Application Survey' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <ion-card (click)="goToMotorClaimSurvey()">  
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="car"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Motor Claims Survey' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
+       <ion-card (click)="goToNonMotorClaimSurvey()">  
+        <ion-item>
+          <ion-avatar slot="start">
+            <fa-icon class="icon" icon="bullhorn"></fa-icon>
+          </ion-avatar>
+          <ion-label>
+            <h3>{{'home.Non-Motor Claims Survey' | translate}}</h3>
+            <p>I'm a big deal</p>
+          </ion-label>
+        </ion-item>
+       </ion-card>
     </div>
   </div>
 </ion-content>

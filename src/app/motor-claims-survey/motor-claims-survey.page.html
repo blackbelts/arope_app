@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">{{"home.Motor Claims Survey" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-toolbar> -->
+    <ion-searchbar [(ngModel)]="searchTerm"
+    (ionChange)="setFilteredItems()"></ion-searchbar>
+  <ion-card (click)="goToDetails(item)" *ngFor="let item of filterdData">
+    <ion-item>
+      <ion-avatar slot="start">
+        <fa-icon class="icon" *ngIf="!item.image" icon="image"></fa-icon>
+        <fa-icon class="icon" *ngIf="item.image" [icon]="item.image"></fa-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{item.state}}</h3>
+        <p>{{item.survey_number}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

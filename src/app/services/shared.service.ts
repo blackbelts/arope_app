@@ -8,5 +8,9 @@ export class SharedService {
   public userToken;
   public userProfile: any;
   public dashboardData: any;
+  public lob: any;
+  public products: any;
+  public group: any;
+  public isInvoiceUploaded: Boolean ;
   constructor() { }
 }

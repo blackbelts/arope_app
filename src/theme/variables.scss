@@ -2,9 +2,25 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+.my-custom-class .popover-wrapper.sc-ion-popover-md .popover-content.sc-ion-popover-md {
+  top: 64px !important;
+  left: 65px !important;
+}
+@font-face {
+  font-family: 'poppins';
+  src: url('../assets/fonts/Poppins-Light.ttf');//mine
+  // src: url('path/to/your/font/file');//path to your font file
+}
+
+* {
+  font-family: 'poopins' !important;
+}
+.segment-button-checked {
+  color: #000;
+}
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #073e89;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -74,6 +90,11 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+  --ion-font-family: "Helvetica Neue";
+  --font-family-base: "Helvetica Neue" !important;
+  
+
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -145,6 +166,8 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+    --ion-font-family: "Helvetica Neue";
+    --font-family-base: "Helvetica Neue" !important;
   }
 
   /*
@@ -184,6 +207,8 @@
     --ion-item-background: #000000;
 
     --ion-card-background: #1c1c1d;
+    --ion-font-family: "Helvetica Neue";
+    --font-family-base: "Helvetica Neue" !important;
   }
 
 
@@ -228,5 +253,10 @@
     --ion-tab-bar-background: #1f1f1f;
 
     --ion-card-background: #1e1e1e;
+    --ion-font-family: "Helvetica Neue";
+    --font-family-base: "Helvetica Neue" !important;
   }
+}
+.ion-color-tertiary {
+  --ion-color-base : red !important;
 }

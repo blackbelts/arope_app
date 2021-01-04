@@ -8,6 +8,8 @@ import { QuotationServicePageRoutingModule } from './quotation-service-routing.m
 
 import { QuotationServicePage } from './quotation-service.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   imports: [
@@ -15,7 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     QuotationServicePageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    FontAwesomeModule
   ],
   declarations: [QuotationServicePage]
 })

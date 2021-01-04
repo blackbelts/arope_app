@@ -1,5 +1,7 @@
 {
   "name": "arope-mobile",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

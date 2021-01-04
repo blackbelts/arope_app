@@ -1,3 +1,5 @@
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { SharedService } from './../services/shared.service';
 import { OdooApiService } from './../services/odoo-api.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -32,26 +34,33 @@ export class Tab1Page implements OnInit {
             '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
             '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
             '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
-  constructor(public odooApi: OdooApiService, public shared: SharedService) {
+  constructor(public odooApi: OdooApiService, public shared: SharedService, public router: Router, private navCtrl: NavController) {
     this.data = this.shared.dashboardData;
     console.log(this.data);
-    for (let rec of this.data.policy_lob){
-      this.doughnutData.push(rec.amount);
-      this.doughnutlabels.push(rec.name)
+    if (this.data.policy_lob) {
+      for (let rec of this.data.policy_lob){
+        this.doughnutData.push(rec.amount);
+        this.doughnutlabels.push(rec.name)
+      }
     }
-    this.lineData = this.data.targetVsProduction.target;
-    this.barData = this.data.targetVsProduction.production;
-    this.currentYear = this.data.lastVsCurrentYear.current_year;
-    this.lastYear = this.data.lastVsCurrentYear.last_year;
+    if (this.shared.group != 'Surveyor') {
+      this.lineData = this.data.targetVsProduction.target;
+      this.barData = this.data.targetVsProduction.production;
+      this.currentYear = this.data.lastVsCurrentYear.current_year;
+      this.lastYear = this.data.lastVsCurrentYear.last_year;
+    }
   }
   
   ngOnInit() {
-    this.makePiechart('pieCanvas', this.doughnutlabels, this.doughnutData);
-    this.makeMixedGraph('mixed', this.barData, this.lineData, 'bar', 'line', 'Production', 'Target', false);
-    this.makeMixedGraph('currentVsLast', this.lastYear, this.currentYear, 'bar', 'bar', 'Last Year', 'Current Year', 'backgroundColor');
+    if (this.shared.group != 'Surveyor') {
+      this.makePiechart('pieCanvas', this.doughnutlabels, this.doughnutData);
+      this.makeMixedGraph('mixed', this.barData, this.lineData, 'bar', 'line', 'Production', 'Target', false);
+      this.makeMixedGraph('currentVsLast', this.lastYear, this.currentYear, 'bar', 'bar', 'Last Year', 'Current Year', 'backgroundColor');
+    }
   }
 
   makePiechart(id,labels,data) {
+    setTimeout(() => {
     let doughnut = document.getElementById(id);
     if (doughnut) {
       this.doughnutChart = new Chart(doughnut, {
@@ -74,13 +83,14 @@ export class Tab1Page implements OnInit {
           //   display: true,
           //   text: 'Predicted world population (millions) in 2050'
           // }
-        }
-      });
-    }
+          }
+        });
+      }
+    }, 1000);
   }
   
   makeMixedGraph(id,firstData, secondData, firstType, secondType, firstLabel, secondLabel, key) {
-    
+    setTimeout(() => {
     let mixed = document.getElementById(id);
     if (mixed) {
       this.mixedChart = new Chart(mixed, {
@@ -112,6 +122,27 @@ export class Tab1Page implements OnInit {
         }
       });
     }
+   }, 1000);
+  }
+  goToPolicies(){
+    this.router.navigateByUrl('policy');
+  }
+  goToRenewls(){
+    const ids = this.data.renews.Green.ids.concat(this.data.renews.Red.ids,this.data.renews.Orange.ids);
+    let navigationExtras = {
+      queryParams: {'renew': ids}
+    };
+    this.router.navigate(['policy'], navigationExtras);
+  }
+  goToCollections(){
+    this.router.navigateByUrl('collections');
+
+  }
+  goToClaims(){
+    this.router.navigateByUrl('arope-claims');
+  }
+  back(){
+    this.navCtrl.back();
   }
 
 }

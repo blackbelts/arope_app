@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">{{"collections.title" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-toolbar> -->
+    <ion-searchbar [(ngModel)]="searchTerm"
+    (ionChange)="setFilteredItems()"></ion-searchbar>
+  <!-- </ion-toolbar> -->
+  <ion-card  *ngFor="let item of filterdData">
+    <ion-item>
+      <ion-avatar slot="start">
+        <fa-icon class="icon" *ngIf="!item.image" icon="image"></fa-icon>
+        <fa-icon class="icon" *ngIf="item.image" [icon]="item.image"></fa-icon>
+        <!-- <img *ngIf="!item.image" src="../../assets/img/empty.png">
+        <img *ngIf="item.image"  src="data:image/png;base64,{{  item.image }}"> -->
+      </ion-avatar>
+      <ion-label>
+        <h3>{{item.product}}</h3>
+        <!-- <h3>I'm a big deal</h3> -->
+        <p>{{item.policy_number}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

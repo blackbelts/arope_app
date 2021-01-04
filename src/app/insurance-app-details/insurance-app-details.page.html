@@ -1,0 +1,230 @@
+<ion-header primary>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small">{{"home.Insurance Application" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!insuranceAppDetails">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{"insurance-application.Application State" | translate}}
+        <ion-chip color="primary">
+          <ion-label style="color: #073e89 !important;">Application Form</ion-label>
+        </ion-chip>
+      </ion-card-subtitle>
+      <!-- <ion-card-title class="color">Application Form</ion-card-title> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued.
+      <br/>
+      Kindly fill the application form and upload the required documents below
+    </ion-card-content>
+  </ion-card>
+  <form  #form="ngForm" (ngSubmit)="createAppForm(form)">
+    <div  *ngFor="let item of allData">
+      <ion-item *ngIf="item.name != 'Initial Offer' && item.name != 'Final Offer'"  (click)="expandItem(item)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+          <ion-icon slot="end" name="chevron-down-circle-outline" *ngIf="!item.expanded"></ion-icon>
+          <ion-icon slot="end" item-left name="chevron-up-circle-outline" *ngIf="item.expanded"></ion-icon>
+          <ion-label class="title">{{ item.name }}</ion-label>
+      </ion-item>
+      
+        <app-expandable [expanded]="item.expanded">
+          <ion-card *ngIf="item.name == 'Application Form'" >
+            <ion-card-content style="padding: 0;">
+              <ion-grid>
+                <ion-row color="primary" justify-content-center>
+                  <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                    <div padding>
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'insurance-application.LOB' | translate }}</ion-label>
+                        <ion-select  required name="lob" [(ngModel)]='Lob' (ionChange)="lobChanged(form)">
+                          <ion-select-option *ngFor="let lob of shared.lob" [value]="lob.id">{{ lob.name }}</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'insurance-application.Product' | translate }}</ion-label>
+                        <ion-select  required name="product" ngModel (ionChange)="productChanged(form)">
+                          <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-item>
+                        <ion-button (click)="downloadApplicationForm()" class="saveButton" expand="full" size="small">
+                          {{ 'insurance-application.Download Application Form' | translate }}
+                        </ion-button>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'insurance-application.Upload Application Form' | translate }}</ion-label>
+                        <ion-input name="application" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+          <ion-card *ngIf="item.name == 'Customer Info'" >
+            <ion-card-content style="padding: 0;">
+              <ion-grid>
+                <ion-row color="primary" justify-content-center>
+                  <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                    <div padding>
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'insurance-application.Customer Name' | translate }}</ion-label>
+                        <ion-input  name="name" type="text" ngModel required></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'insurance-application.Customer Phone' | translate }}</ion-label>
+                        <ion-input name="mobile" type="text" ngModel required></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">{{ 'insurance-application.Customer Email' | translate }}</ion-label>
+                        <ion-input name="email" type="email" ngModel required></ion-input>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+          <ion-card *ngIf="item.name == 'Required Documents'">
+            <ion-card-content style="padding: 0;">
+              <ion-grid>
+                <ion-row color="primary" justify-content-center>
+                  <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                    <div padding>
+                      <ion-item *ngFor="let item of requiredDocuments" >
+                        <ion-label position="stacked">{{item.description}}</ion-label>
+                        <ion-input  name="{{item.description}}" type="file" (change)=handleUploadFiles($event) ngModel required></ion-input>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </app-expandable>
+      
+    </div>
+    <div padding>
+      <ion-row>
+        <ion-col  class="ion-text-center">
+          <ion-button class="saveButton" expand="full" size="small" type="submit" [disabled]="form.invalid">
+            <ion-icon slot="start" name="checkmark"></ion-icon>
+            {{ 'insurance-application.Create' | translate }}
+          </ion-button>
+        </ion-col>
+        
+      </ion-row>
+    </div>
+  </form>
+</ion-content>
+
+<ion-content *ngIf="insuranceAppDetails" >
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{"insurance-application.Application State" | translate}}
+        <ion-chip color="primary">
+          <ion-label style="color: #073e89 !important;">{{insuranceAppDetails.test_state[1]}}</ion-label>
+        </ion-chip>
+      </ion-card-subtitle>
+      <!-- <ion-card-title class="color">{{insuranceAppDetails.test_state[1]}}</ion-card-title> -->
+    </ion-card-header>
+  
+    <ion-card-content *ngIf="insuranceAppDetails.test_state[1] == 'Application Form'" >
+      Welcome to AROPE Egypt Self Service, I am here to help you until your policy is issued. 
+      Kindly fill the application form and upload the required documents below
+    </ion-card-content>
+    <ion-card-content *ngIf="insuranceAppDetails.test_state[1] != 'Application Form'" >
+      {{insuranceAppDetails.message}}
+    </ion-card-content>
+
+  </ion-card>
+  <div  *ngFor="let item of allData" >
+    <ion-item *ngIf="item.name != 'Required Documents'" (click)="expandItem(item)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+        <ion-icon slot="end" name="chevron-down-circle-outline" *ngIf="!item.expanded"></ion-icon>
+        <ion-icon slot="end" item-left name="chevron-up-circle-outline" *ngIf="item.expanded"></ion-icon>
+        <ion-label class="title">{{ item.name }}</ion-label>
+    </ion-item>
+    <app-expandable [expanded]="item.expanded">
+      <ion-card *ngIf="item.name == 'Application Form'" >
+        <ion-card-content>
+          
+          <h4 class="color">{{'insurance-application.Application Number' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.applicationNumber}}</p>
+        
+          <h4 class="color">{{'insurance-application.Application Date' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.applicationDate}}</p>
+          <h4 class="color">{{'insurance-application.LOB' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.lob}}</p>
+          <h4 class="color">{{'insurance-application.Product' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.product}}</p>
+          
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="item.name == 'Customer Info'" >
+        <ion-card-content>
+          <h4 class="color">{{'insurance-application.Customer Name' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.name}}</p>
+          <h4 class="color">{{'insurance-application.Customer Phone' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.phone}}</p>
+          <h4 class="color">{{'insurance-application.Customer Email' | translate }} : </h4>
+          <p style="color: rgb(174, 175, 178);">{{this.email}}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="item.name == 'Initial Offer'" >
+        <ion-card-content *ngIf="initialOffer" >
+          <!-- <p style="color: rgb(174, 175, 178);">{{item.message}}</p> -->
+          <ion-row>
+            <ion-col class="th" style="text-align: center;"><button (click)="downloadOffer(initialOffer['file_id'][0])" class="btn">{{"insurance-application.Offer" | translate}}</button></ion-col>
+          </ion-row>
+          <ion-row *ngIf="initialOffer['state'] == 'submitted'" >
+            <ion-col class="th" size="6">
+              <ion-button (click)="acceptOffer(initialOffer['id'])" class="saveButton" size="small">
+                <ion-icon slot="start" name="checkmark"></ion-icon>
+                {{"insurance-application.Accept" | translate}}
+              </ion-button>
+              
+            </ion-col>
+            <ion-col class="th" size="6">
+              <ion-button (click)="rejectOffer(initialOffer['id'])" class="discardButton" size="small">
+                <ion-icon slot="start" name="close"></ion-icon>
+                {{"insurance-application.Reject" | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="item.name == 'Final Offer'" >
+        <ion-card-content *ngIf="finalOffer" >
+          <!-- <p style="color: rgb(174, 175, 178);">{{item.message}}</p> -->
+          <ion-row>
+            <ion-col class="th" style="text-align: center;"><button (click)="downloadOffer(finalOffer['file_id'][0])" class="btn">{{"insurance-application.Offer" | translate}}</button></ion-col>
+          </ion-row>
+          <ion-row *ngIf="finalOffer['state'] == 'submitted'" >
+            <ion-col class="th" size="6">
+              <ion-button (click)="acceptOffer(finalOffer['id'])" class="saveButton" size="small">
+                <ion-icon slot="start" name="checkmark"></ion-icon>
+                {{"insurance-application.Accept" | translate}}
+              </ion-button>
+              
+            </ion-col>
+            <ion-col class="th" size="6">
+              <ion-button (click)="rejectOffer(finalOffer['id'])" class="discardButton" size="small">
+                <ion-icon slot="start" name="close"></ion-icon>
+                {{"insurance-application.Reject" | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      
+    </app-expandable>
+    
+</div>
+</ion-content>

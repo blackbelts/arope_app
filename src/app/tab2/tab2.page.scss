@@ -1,21 +1,63 @@
 // $show-image-auth: true;
 // $home-image: url(/assets/images/background-img.jpg);
 // $backgroudn-opacity: 0.5;
-
+.new-background-color{
+  --background: #073e89!important;
+  --color: white;
+  --font-size: 14px;
+}
 @mixin easeOut {
     transition: all 0.5s ease-out;
 }
+// .overlay {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   z-index: 0;
+//   background: rgba(68, 68, 68, $backgroudn-opacity);
+// }
+#tab2-img{
+  background: #fff;
+  border-radius: 50px 50px 0px 0px;
+  top: -50px;
+  position: relative;
+  width: 100%;
+}
+.optn-btn {
+  font-size: 26px;
+}
+
+.blues-nav {
+    --background: rgb(68, 187, 236);
+  }
+.nav-content {
+  color: #fff;
+}
+.new-background-color{
+  --background: #073e89!important;
+  --color: white;
+  --font-size: 14px;
+}
 
 .back{
-  background-color: inherit;
+  background-color: #073e89!important;
+  color: white;
+  font-size: 14px;
 }
 
-ion-toolbar {
-    --background: transparent;
-    margin-top: 16px;
-    height: 10vh;
-}
+// ion-toolbar {
+//     --background: transparent;
+//     margin-top: 10px;
+//     height: 10vh;
+// }
+.headerImage{
+    margin-top: 10px;
+    height: 11vh;
+    --background: initial;
 
+}
 ion-img {
     width: 60px;
     height: auto;
@@ -30,7 +72,7 @@ h2 span {
   h2 small {
     // color: rgb(50, 97, 149);
     color: #073e89!important;
-    font-size: 70% !important;
+    // font-size: 70% !important;
   }
 h2 {
     text-align: center;
@@ -39,14 +81,18 @@ h2 {
     background: transparent ;
 }
 ion-icon {
-    font-size: 31px;
-    color: #073e89!important;
+    font-size: 20px;
+    color: #e77a11 !important;
+  }
+  .icon {
+    font-size: 25px;
+    color: #e77a11!important;
   }
 
   .color{
-    margin-top: 0px;
-    color: rgb(128,128,128);
-    font-size: small;
+    margin-top: 3px;
+    color: gray;
+    font-size: 13px;
   }
   .new{
     font-size: 31px;
@@ -69,11 +115,12 @@ ion-icon {
 }
 .mt32 {
   margin-top: 16px !important;
+  margin-left: 11px;
 }
 .o_partner_dashboard_grade_active_ready {
   font-weight: 600;
-  background-color: #00A09D !important;
-  border-color: #00A09D !important;
+  background-color: #073e89 !important;
+  border-color: #073e89 !important;
   color: #fff;
 }
 .o_partner_dashboard_wizard li {
@@ -111,10 +158,10 @@ ul.wizard li {
 
 }
 .o_partner_dashboard_wizard .o_partner_dashboard_grade_active_ready .chevron {
-  border-left-color: #00A09D;
+  border-left-color: #073e89;
 }
 .o_partner_dashboard_grade_active_ready .chevron:before {
-  border-left-color: #00A09D !important;
+  border-left-color: #073e89 !important;
 }
 ul.wizard li .chevron {
   position: absolute;
@@ -136,7 +183,7 @@ ul.wizard li .chevron {
   ion-row {
     // height: 100%;
     flex-wrap: wrap;
-    margin-top: 129px;
+    margin-top: 30px;
   }
 
   ion-col {
@@ -148,3 +195,92 @@ ul.wizard li .chevron {
   .but-color{
     background-color: #073e89!important;
   }
+  .icon {
+    font-size: 20px;
+    color: #e77a11;
+}
+ion-avatar {
+  height: 20px !important;
+  width: 25px !important;
+}
+ion-label > h3 {
+  color: #080808;
+}
+ion-label > p {
+  color: #383838;
+  font-size: 12px;
+}
+ion-card {
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,.3);
+
+}
+.headicon{
+  color: white !important;
+}
+.leave-content-div {
+  background: #fff;
+  border-radius: 50px 50px 0px 0px;
+  top: -50px;
+  position: relative;
+  width: 100%;
+}
+
+.leave-empty-div {
+  background: #073e89;
+  height: 280px;
+}
+
+.user-icon {
+  font-size: 85px;
+  /* margin: 10px; */
+  height: 100%;
+  width: 100%;
+  /* margin: auto;*/
+}
+
+.profile-pic {
+  margin: 0 auto;
+  display: block;
+  height: 100%;
+  border-radius: 50%;
+  width: 100%;
+}
+
+.employee-div {
+  text-align: center;
+  border: solid 1px #dcdcdc;
+  border-radius: 50%;
+  background: #fff;
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+}
+
+.employee-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-top: 8px;
+}
+
+.employee-design {
+  font-size: 14px;
+  text-align: center;
+  color: white;
+}
+
+.custom-icon-edit-icon {
+  font-size: 35px;
+  color: white;
+  font-weight: 500;
+}
+
+.edit-icon {
+  background: #FE9C45;
+  border-radius: 20px;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  margin-left: 100px;
+}

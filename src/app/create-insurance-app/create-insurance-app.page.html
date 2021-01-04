@@ -1,46 +1,72 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="new-background-color">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{"home.Insurance Application" | translate}}</ion-title>
+    <ion-title size="small">{{"home.Insurance Application" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form  #form="ngForm">
+  <form  #form="ngForm" (ngSubmit)="createAppForm(form)" *ngIf="!isCreated">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div padding>
             <ion-item>
-              <ion-input  name="lob" type="text" placeholder="Customer Name" ngModel required></ion-input>
+              <ion-label position="floating">{{ 'insurance-application.LOB' | translate }}</ion-label>
+              <ion-select  required name="lob" [(ngModel)]='lob' (ionChange)="lobChanged(form)">
+                <ion-select-option *ngFor="let lob of shared.lob" [value]="lob.id">{{ lob.name }}</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
-              <ion-input name="Customer Mobile" type="text" placeholder="Customer Mobile" ngModel required></ion-input>
+              <ion-label position="floating">{{ 'insurance-application.Product' | translate }}</ion-label>
+              <ion-select  required name="product" ngModel (ionChange)="productChanged(form)">
+                <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
-              <ion-input name="email" type="email" placeholder="Customer Email" ngModel required></ion-input>
+              <ion-label position="floating">{{ 'insurance-application.Customer Name' | translate }}</ion-label>
+              <ion-input  name="name" type="text" ngModel required></ion-input>
             </ion-item>
-            <!-- <ion-item>
-              <ion-input name="confirm" type="password" placeholder="Password again" ngModel required></ion-input>
-            </ion-item> -->
+            <ion-item>
+              <ion-label position="floating">{{ 'insurance-application.Customer Phone' | translate }}</ion-label>
+              <ion-input name="mobile" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">{{ 'insurance-application.Customer Email' | translate }}</ion-label>
+              <ion-input name="email" type="email" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-button (click)="downloadApplicationForm()" class="saveButton" expand="full" size="small">
+                {{ 'insurance-application.Download Application Form' | translate }}
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">{{ 'insurance-application.Upload Application Form' | translate }}</ion-label>
+              <ion-input name="application" type="file" (change)=handleUpload($event) ngModel required></ion-input>
+            </ion-item>
+            <h4>{{'claim.Required Documents' | translate}}</h4>
+            <ion-item *ngFor="let item of requiredDocuments" >
+              <ion-label position="stacked">{{item.description}}</ion-label>
+              <ion-input name="{{item.description}}" type="file" (change)=handleUploadFiles($event) ngModel required></ion-input>
+            </ion-item>
           </div>
           <div padding>
             <!-- Icons -->
             <ion-row>
               <ion-col  class="ion-text-center">
-                <ion-button class="saveButton" expand="full" size="small">
+                <ion-button class="saveButton" expand="full" size="small" type="submit" [disabled]="form.invalid">
                   <ion-icon slot="start" name="checkmark"></ion-icon>
-                  Save
+                  {{ 'insurance-application.Create' | translate }}
                 </ion-button>
               </ion-col>
-              <ion-col class="ion-text-center">
+              <!-- <ion-col class="ion-text-center">
                 <ion-button class="discardButton" expand="full" size="small">
                   <ion-icon slot="start" name="close"></ion-icon>
                   Discard
                 </ion-button>
-              </ion-col>
+              </ion-col> -->
             </ion-row>
             <!-- <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button> -->
           </div>
@@ -48,5 +74,10 @@
       </ion-row>
     </ion-grid>
   </form>
+  <ion-card *ngIf="isCreated" >
+    <ion-card-content>
+      <p>{{"insurance-application.Your Application Form Is Submitted" | translate}}</p>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
