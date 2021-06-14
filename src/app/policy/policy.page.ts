@@ -96,5 +96,8 @@ export class PolicyPage implements OnInit {
     };
     this.router.navigate(['policy-details'], navigationExtras);
   }
+  numberWithCommas(x) {
+    return x.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
 }

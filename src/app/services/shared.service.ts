@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedService {
+  public name;
   public userId;
   public userToken;
   public userProfile: any;
@@ -13,4 +14,8 @@ export class SharedService {
   public group: any;
   public isInvoiceUploaded: Boolean ;
   constructor() { }
+  
+  numberWithCommas(x) {
+    return x.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 }

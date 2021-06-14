@@ -8,164 +8,272 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-toolbar>
-    <ion-segment value="travel" (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="travel">
-        <!-- <ion-label style="color: #073e89 !important;">{{"quotation-service.Travel" | translate}}</ion-label> -->
-        <ion-icon style="color: #073e89 !important;" name="airplane"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="medical">
-        <!-- <ion-label style="color: #073e89 !important;">{{"quotation-service.Medical" | translate}}</ion-label> -->
-        <fa-icon style="color: #073e89 !important;" class="icon" icon="stethoscope"></fa-icon>
-      </ion-segment-button>
-      <ion-segment-button value="motor">
-        <!-- <ion-label style="color: #073e89 !important;">{{"quotation-service.Motor" | translate}}</ion-label> -->
-        <ion-icon style="color: #073e89 !important;" name="car-sport"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="personal"> 
-        <!-- <ion-label style="color: #073e89 !important;">{{"quotation-service.Personal Accident" | translate}}</ion-label> -->
-        <fa-icon style="color: #073e89 !important;" class="icon" icon="wheelchair"></fa-icon>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-    <ion-card>
-    <form  #form="ngForm" (ngSubmit)="submitForm(form)">
+  <div *ngIf="!isBuy">
+    <div>
+      <ion-toolbar>
+      <ion-segment value="{{activeSegment}}" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="travel">
+          <!-- <ion-label style="color: #073e89 !important;">{{"quotation-service.Travel" | translate}}</ion-label> -->
+          <ion-card>
+            <ion-icon style="color: #073e89" name="airplane"></ion-icon>
+          </ion-card>
+        </ion-segment-button>
+        <ion-segment-button value="medical">
+          <!-- <ion-label style="color: #073e89 !important;">{{"quotation-service.Medical" | translate}}</ion-label> -->
+          <ion-card>
+            <fa-icon style="color: #073e89" class="icon" icon="stethoscope"></fa-icon>
+          </ion-card>
+        </ion-segment-button>
+        <ion-segment-button value="motor">
+          <ion-card>
+            <ion-icon style="color: #073e89" name="car-sport"></ion-icon>
+          </ion-card>
+        </ion-segment-button>
+        <ion-segment-button value="personal">
+          <ion-card>
+            <fa-icon style="color: #073e89" class="icon" icon="wheelchair"></fa-icon>
+          </ion-card>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+      <ion-card>
+      <form  #form="ngForm" (ngSubmit)="submitForm(form)">
+        <ion-grid>
+          <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <div padding *ngIf="type == 'travel'">
+                <ion-item>
+                  <ion-label position="stacked">Plan</ion-label>
+                  <ion-select class="select" required name="product" ngModel (ionChange)="getCovers(form)">
+                    <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Zone' | translate }}</ion-label>
+                  <ion-select class="select"  required name="zone" ngModel (ionChange)="getCovers(form)">
+                    <ion-select-option *ngFor="let zone of zones" [value]="zone.value">{{ zone.viewValue }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Date of Birth' | translate }}
+                  </ion-label>
+                  <ion-datetime name="dob" class="select" ngModel display-format="MMM DD YYYY" picker-format="YYYY MMM DD" [max]="maxDate" (ionChange)="getCovers(form)"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Coverage From' | translate }}
+                  </ion-label>
+                  <ion-datetime
+                    name="dateFrom"
+                    ngModel
+                    display-format="MMM DD YYYY" 
+                    picker-format="YYYY MMM DD"
+                    [min]="maxDateCoverageFrom"
+                    class="select"
+                    ></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ "indi.Period" | translate }}
+                  </ion-label>
+                  <ion-select class="select" name="period" ngModel  required (ionChange)="periodChanged(form)">
+                    <ion-select-option *ngFor="let period of periods" [value]="period.value">{{ period.display }} </ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ "indi.Coverage To" | translate }}
+                  </ion-label>
+                  <ion-datetime 
+                            name="coverageTo"
+                            ngModel
+                            [value]="newDate"
+                            display-format="MMM DD YYYY" 
+                            picker-format="YYYY MMM DD"
+                            readonly
+                            class="select"
+                            ></ion-datetime>
+                </ion-item>
+              </div>
+              <div padding *ngIf="type == 'medical'">
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Product' | translate }}</ion-label>
+                  <ion-select class="select"  required name="product" ngModel>
+                    <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Date of Birth' | translate }}
+                  </ion-label>
+                  <ion-datetime class="select" name="dob" ngModel display-format="MMM DD YYYY" picker-format="YYYY MMM DD" [max]="maxDate"></ion-datetime>
+                </ion-item>
+              </div>
+              <div padding *ngIf="type == 'motor'">
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Product' | translate }}</ion-label>
+                  <ion-select class="select" required name="product" ngModel>
+                    <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Sum Insured' | translate }}</ion-label>
+                  <ion-input class="select" name="sum_insured" type="number" ngModel required></ion-input>
+                </ion-item>
+              </div>
+              <div padding *ngIf="type == 'personal'">
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Date of Birth' | translate }}
+  <!--                  <ion-text color="danger">*</ion-text>-->
+                  </ion-label>
+                  <ion-datetime class="select" name="dob" ngModel display-format="MMM DD YYYY" picker-format="YYYY MMM DD" [max]="maxDate"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Job' | translate }}</ion-label>
+                  <ion-select class="select"  required name="job" ngModel>
+                    <ion-select-option *ngFor="let job of jobs" [value]="job.id">{{ job.job_id }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">{{ 'quotation-service.Sum Insured' | translate }}</ion-label>
+                  <ion-input class="select" name="sum_insured" type="number" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-list>
+                    <ion-radio-group>
+                      <!-- <ion-list-header> -->
+                        <ion-label>Basic Covers</ion-label>
+                      <!-- </ion-list-header> -->
+                  
+                        <ion-item *ngFor="let cover of basicCovers">
+                          <ion-label>{{cover.cover_id}}</ion-label>
+                          <ion-radio slot="end" value="cover.id"></ion-radio>
+                        </ion-item>
+                
+                    </ion-radio-group>
+                  </ion-list>
+                </ion-item>
+                <ion-item>
+                  <ion-list>
+                    <!-- <ion-list-header> -->
+                      <ion-label>Optional Covers</ion-label>
+                    <!-- </ion-list-header> -->
+                    <ion-item *ngFor="let cover of optionalCovers">
+                      <ion-label>{{cover.cover_id}}</ion-label>
+                      <ion-checkbox slot="end" [(ngModel)]="cover.isChecked" name="death" [checked]="cover.taken" (change)="cover.taken = !cover.taken"></ion-checkbox>
+                    </ion-item>
+                  </ion-list>
+                </ion-item>
+              </div>
+              
+              <div padding>
+                <ion-row>
+                  <ion-col  class="ion-text-center">
+                    <ion-button class="saveButton" expand="block" type="submit" [disabled]="form.invalid">
+                      <ion-icon slot="start" name="checkmark"></ion-icon>
+                      Get A Quote
+                    </ion-button>
+                  </ion-col>
+                  <!-- <ion-col class="ion-text-center">
+                    <ion-button class="discardButton" expand="full" size="small">
+                      <ion-icon slot="start" name="close"></ion-icon>
+                      Discard
+                    </ion-button>
+                  </ion-col> -->
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card>
+    </div>
+    <ion-card *ngIf="price && type == 'travel' || price && type == 'personal'" class="price_card">
+      <ion-card-content>
+        <div class="total-quote">
+          <h4 class="title">{{"quotation-service.Price" | translate}}</h4>
+          <h3 class="price">{{shared.numberWithCommas(price)}} EGP</h3>
+          <button (click)="buy()" class="button-quote">BUY</button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="price && type == 'medical' || price && type == 'motor'" class="price_card">
+      <ion-card-content>
+        <div class="total-quote">
+          <h4 class="title">{{"quotation-service.Price" | translate}}</h4>
+          <h3 class="price">{{shared.numberWithCommas(price)}} EGP</h3>
+          <button (click)="create_app()" class="button-quote">{{"quotation-service.Create App" | translate}}</button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="price && travelCovers.length != 0 ">
+      <h2 style="font-weight: 400;text-decoration: underline; padding-left:11px;">Plan Benefits</h2>
+      <ion-card *ngFor="let item of travelCovers">
+        <ion-item class="item" lines="none">
+          <ion-label>
+            <h3>{{item.cover}}</h3>
+            <p>{{item.limit}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
+  <ion-card *ngIf="isBuy && !policyNum">
+    <h2 style="font-weight: 400;text-decoration: underline; padding-left:11px;">Traveller Info</h2>
+    <form  #form="ngForm" (ngSubmit)="submitsForm(form)">
       <ion-grid>
         <ion-row color="primary" justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <div padding *ngIf="type == 'travel'">
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Product' | translate }}</ion-label>
-                <ion-select  required name="product" ngModel>
-                  <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Zone' | translate }}</ion-label>
-                <ion-select  required name="zone" ngModel>
-                  <ion-select-option *ngFor="let zone of zones" [value]="zone.value">{{ zone.viewValue }}</ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Date of Birth' | translate }} <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-datetime name="dob" ngModel display-format="MMM DD YYYY" picker-format="YYYY MMM DD" [max]="maxDate"></ion-datetime>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Coverage From' | translate }} <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-datetime
-                  name="dateFrom"
-                  ngModel
-                  display-format="MMM DD YYYY" 
-                  picker-format="YYYY MMM DD"
-                  [min]="maxDateCoverageFrom"
-                  ></ion-datetime>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ "indi.Period" | translate }} <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-select name="period" ngModel  required (ionChange)="periodChanged(form)">
-                  <ion-select-option *ngFor="let period of periods" [value]="period">{{ period }} days</ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ "indi.Coverage To" | translate }} <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-datetime 
-                          name="coverageTo"
-                          ngModel
-                          [value]="newDate"
-                          display-format="MMM DD YYYY" 
-                          picker-format="YYYY MMM DD"
-                          readonly
-                          ></ion-datetime>
-              </ion-item>
-            </div>
-            <div padding *ngIf="type == 'medical'">
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Product' | translate }}</ion-label>
-                <ion-select  required name="product" ngModel>
-                  <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Date of Birth' | translate }} <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-datetime name="dob" ngModel display-format="MMM DD YYYY" picker-format="YYYY MMM DD" [max]="maxDate"></ion-datetime>
-              </ion-item>
-            </div>
-            <div padding *ngIf="type == 'motor'">
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Product' | translate }}</ion-label>
-                <ion-select  required name="product" ngModel>
-                  <ion-select-option *ngFor="let product of products" [value]="product.id">{{ product.name }}</ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Sum Insured' | translate }}</ion-label>
-                <ion-input name="sum_insured" type="number" ngModel required></ion-input>
-              </ion-item>
-            </div>
-            <div padding *ngIf="type == 'personal'">
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Date of Birth' | translate }} <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-datetime name="dob" ngModel display-format="MMM DD YYYY" picker-format="YYYY MMM DD" [max]="maxDate"></ion-datetime>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Job' | translate }}</ion-label>
-                <ion-select  required name="job" ngModel>
-                  <ion-select-option *ngFor="let job of jobs" [value]="job.id">{{ job.job_id }}</ion-select-option>
-                </ion-select>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">{{ 'quotation-service.Sum Insured' | translate }}</ion-label>
-                <ion-input name="sum_insured" type="number" ngModel required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-list>
-                  <ion-radio-group>
-                    <!-- <ion-list-header> -->
-                      <ion-label>Basic Covers</ion-label>
-                    <!-- </ion-list-header> -->
-                
-                      <ion-item *ngFor="let cover of basicCovers">
-                        <ion-label>{{cover.cover_id}}</ion-label>
-                        <ion-radio slot="end" value="cover.id"></ion-radio>
-                      </ion-item>
-              
-                  </ion-radio-group>
-                </ion-list>
-              </ion-item>
-              <ion-item>
-                <ion-list>
-                  <!-- <ion-list-header> -->
-                    <ion-label>Optional Covers</ion-label>
-                  <!-- </ion-list-header> -->
-                  <ion-item *ngFor="let cover of optionalCovers">
-                    <ion-label>{{cover.cover_id}}</ion-label>
-                    <ion-checkbox slot="end" [(ngModel)]="cover.isChecked" name="death" [checked]="cover.taken" (change)="cover.taken = !cover.taken"></ion-checkbox>
-                  </ion-item>
-                </ion-list>
-              </ion-item>
-            </div>
-            
+            <ion-item>
+              <ion-label position="stacked">Fisrt Name</ion-label>
+              <ion-input class="select" name="fname" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Second Name</ion-label>
+              <ion-input class="select" name="sname" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Family Name</ion-label>
+              <ion-input class="select" name="lname" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Gender</ion-label>
+              <ion-select class="select" required name="gender" ngModel>
+                <ion-select-option value="M">Male</ion-select-option>
+                <ion-select-option value="F">Female</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">{{ 'quotation-service.Date of Birth' | translate }}
+              </ion-label>
+              <ion-datetime name="fdob" class="select" ngModel display-format="MMM DD YYYY" picker-format="YYYY MMM DD" [max]="maxDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Email Address</ion-label>
+              <ion-input class="select" name="mail" type="email" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Phone Number</ion-label>
+              <ion-input class="select" name="phone" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">National ID Number</ion-label>
+              <ion-input class="select" name="idc" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Passport Number</ion-label>
+              <ion-input class="select" name="passNum" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Your Address</ion-label>
+              <ion-input class="select" name="address" type="text" ngModel required></ion-input>
+            </ion-item>
             <div padding>
               <ion-row>
                 <ion-col  class="ion-text-center">
-                  <ion-button class="saveButton" expand="full" size="small" type="submit" [disabled]="form.invalid">
+                  <ion-button class="saveButton" expand="block" type="submit" [disabled]="form.invalid">
                     <ion-icon slot="start" name="checkmark"></ion-icon>
-                    Get A Quote
+                    Complete Purchase
                   </ion-button>
                 </ion-col>
-                <!-- <ion-col class="ion-text-center">
-                  <ion-button class="discardButton" expand="full" size="small">
-                    <ion-icon slot="start" name="close"></ion-icon>
-                    Discard
-                  </ion-button>
-                </ion-col> -->
+                
               </ion-row>
             </div>
           </ion-col>
@@ -173,21 +281,21 @@
       </ion-grid>
     </form>
   </ion-card>
-  </div>
-  <ion-card *ngIf="price" class="price_card">
-    <ion-card-header class="cardHeader">
-      <ion-card-title class="cardTitle">{{"quotation-service.Price" | translate}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content class="cardContent">
-      <p class="color price">{{price}} EGP</p>
-      
-    </ion-card-content>
-    <ion-row class="cardFooter">
-      <ion-col>
-        <button (click)="create_app()" class="btn">{{"quotation-service.Create App" | translate}}</button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+  <ion-card *ngIf="isBuy && policyNum">
+    <ion-card-content style="text-align: right;">
+      <h4> <span style="color: #073e89;">{{policyNum}}</span> {{ 'thankyou.title2' | translate }} </h4>
+      <br>
+      <h4>
+        {{ 'thankyou.par1' | translate }}
+      </h4>
 
+      <br>
+
+      <h4>{{ 'thankyou.msg1' | translate }}</h4>
+      <h4>{{ 'thankyou.msg2' | translate }}</h4>
+      <h4>{{ 'thankyou.msg3' | translate }}</h4>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

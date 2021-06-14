@@ -37,8 +37,8 @@ export class Tab1Page implements OnInit {
   constructor(public odooApi: OdooApiService, public shared: SharedService, public router: Router, private navCtrl: NavController) {
     this.data = this.shared.dashboardData;
     console.log(this.data);
-    if (this.data.policy_lob) {
-      for (let rec of this.data.policy_lob){
+    if (this.data['policy_lob']) {
+      for (let rec of this.data['policy_lob']){
         this.doughnutData.push(rec.amount);
         this.doughnutlabels.push(rec.name)
       }
@@ -115,7 +115,7 @@ export class Tab1Page implements OnInit {
             
         },
         options: {
-          legend: { display: false },
+          legend: { display: true },
           animation: {
             duration: 2000 // general animation time
           },
@@ -143,6 +143,10 @@ export class Tab1Page implements OnInit {
   }
   back(){
     this.navCtrl.back();
+  }
+  productionAchive(){
+
+    return((this.data.targetVsProduction.production.reduce((a, b) => a + b, 0) / this.data.targetVsProduction.target.reduce((a, b) => a + b, 0)) *100)
   }
 
 }

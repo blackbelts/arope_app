@@ -23,6 +23,8 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { File } from '@ionic-native/file/ngx';
+
 
 
 
@@ -43,6 +45,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
     TranslateConfigService,
     OdooApiService,
     SharedService,
+    File
   ],
   bootstrap: [AppComponent]
 })

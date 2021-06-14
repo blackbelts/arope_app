@@ -24,6 +24,9 @@
         <div class="user-icon" *ngIf="data">
           <ion-img *ngIf="!data.user_image"  src="../../assets/img/empty.png"></ion-img>
           <img *ngIf="data.user_image" class=profile-pic src="data:image/png;base64,{{ data.user_image  }}">
+          <div class="inner">
+            <fa-icon class="icon" icon="camera"></fa-icon>
+          </div>
         </div>
     </div>
     <!-- <div class="employee-design">{{this.data.user.name}}</div> -->

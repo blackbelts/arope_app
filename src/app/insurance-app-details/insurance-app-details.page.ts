@@ -45,7 +45,7 @@ export class InsuranceAppDetailsPage implements OnInit {
     public http: HttpClient,
   ) {
     
-    this.allData = [{name: 'Application Form', expanded: false},{name: 'Customer Info', expanded: false},
+    this.allData = [{name: 'Customer Info', expanded: false},{name: 'Application Form', expanded: false},
    {name: 'Required Documents', expanded: false}, {name: 'Initial Offer', expanded: false}, {name: 'Final Offer', expanded: false}]
    this.getAll();
 

@@ -17,8 +17,8 @@
     <ion-searchbar [(ngModel)]="searchTerm"
     (ionChange)="setFilteredItems()"></ion-searchbar>
   <!-- </ion-toolbar> -->
-  <ion-card (click)="goToDetails(item)" *ngFor="let item of filterdData">
-    <ion-item>
+  <ion-card class="card" (click)="goToDetails(item)" *ngFor="let item of filterdData">
+    <ion-item class="item">
       <ion-avatar slot="start">
         <fa-icon class="icon" *ngIf="!item.image" icon="image"></fa-icon>
         <fa-icon class="icon" *ngIf="item.image" [icon]="item.image"></fa-icon>
@@ -26,10 +26,12 @@
         <img *ngIf="item.image"  src="data:image/png;base64,{{  item.image }}"> -->
       </ion-avatar>
       <ion-label>
-        <h3>{{item.product}}</h3>
-        <!-- <h3>I'm a big deal</h3> -->
-        <p>{{item.policy_number}}</p>
+        <h3>{{item.product}}/{{item.policy_number}}</h3>
+        <p>{{item.customer_name}}</p>
       </ion-label>
+      <ion-chip style="font-size: 13px;" color="primary" slot="end">
+        <ion-label style="color: #073e89 !important;">{{numberWithCommas(item.net_prem)}}</ion-label>
+      </ion-chip>
     </ion-item>
   </ion-card>
 </ion-content>

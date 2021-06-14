@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SharedService } from './shared.service';
 import { HttpClient } from '@angular/common/http';
+import { HomeMenuComponent } from './../components/home-menu/home-menu.component';
+
 // import { ToastController } from '@ionic/angular';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController, NavController, PopoverController} from '@ionic/angular';
+
 
 
 @Injectable({
@@ -16,6 +19,7 @@ export class OdooApiService {
   odooUrl = "http://207.154.195.214";
   odooPort = 7070;
   odooDBName = "arope-space01";
+  currentPopover: any = null;
   private loader: any;
   constructor(
     public shared: SharedService,
@@ -23,6 +27,7 @@ export class OdooApiService {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
+    public popoverController: PopoverController
     ) {
     }
     login(username,password) {
@@ -105,5 +110,22 @@ export class OdooApiService {
   }
   hideLoading() {
     this.loader.dismiss();
+  }
+  async handleButtonClick(ev) {
+    const popover = await this.popoverController.create({
+      component: HomeMenuComponent,
+      componentProps:{},
+      cssClass: 'my-custom-class-left',
+      event: ev,
+      translucent: true
+    });
+    this.currentPopover = popover;
+    popover.style.cssText = '--min-width: 185px; --max-width: 185px;';
+    return popover.present();
+  }
+  dismissPopover() {
+    if (this.currentPopover) {
+      this.currentPopover.dismiss().then(() => { this.currentPopover = null; });
+    }
   }
 }

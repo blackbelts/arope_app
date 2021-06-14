@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.statusBar.backgroundColorByHexString('#073e89');
+//       this.statusBar.backgroundColorByHexString('#fff');
       this.splashScreen.hide();
       if (localStorage.getItem("firstOpen") == "false") {
         this.router.navigateByUrl("")
@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
         this.shared.userId = parseInt(localStorage.getItem("user_id"));
         this.shared.userToken = localStorage.getItem("token");
         this.shared.group = localStorage.getItem("group");
+        this.shared.name = localStorage.getItem("user_name");
         this.odooApi.updateToken;
         this.router.navigateByUrl('tab2');
       }

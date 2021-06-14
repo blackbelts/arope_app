@@ -1,3 +1,4 @@
+import { OdooApiService } from '../../services/odoo-api.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TranslateConfigService } from '../../services/translate-config.service';
@@ -11,7 +12,7 @@ export class HomeMenuComponent implements OnInit {
   selectedLanguage: any;
   languages: any;
 
-  constructor(public languageService: TranslateConfigService,public router: Router) { 
+  constructor(public languageService: TranslateConfigService,public router: Router, public odooApi: OdooApiService) { 
     this.selectedLanguage = this.languageService.getDefaultLanguage();
     this.languages = this.languageService.getLanguages();
   }
@@ -25,6 +26,7 @@ export class HomeMenuComponent implements OnInit {
   logout(){
     localStorage.clear();
     this.router.navigateByUrl('/');
+    this.odooApi.dismissPopover();
   }
 
 

@@ -26,10 +26,12 @@
         <!-- <img *ngIf="item.image"  src="data:image/png;base64,{{  item.image }}"> -->
       </ion-avatar>
       <ion-label>
-        <h3>{{item.state}}</h3>
-        <!-- <h3>I'm a big deal</h3> -->
-        <p>{{item.application_number}}</p>
+        <h3>{{item.application_number}}</h3>
+        <span>{{item.name}}</span>
       </ion-label>
+      <ion-chip style="font-size: 9px;" color="primary" slot="end">
+        <ion-label style="color: #073e89 !important;">{{item.state}}</ion-label>
+      </ion-chip>
     </ion-item>
   </ion-card>
 

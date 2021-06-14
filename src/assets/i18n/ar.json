@@ -22,7 +22,7 @@
         "Claims count per LOB" : "عدد التعويضات لكل نوع تأمينى",
         "Insurance applications count per LOB": "طلبات التأمين لكل نوع تأمينى",
         "Your Requests" : "خدماتك التأمينيه",
-        "endorsements Requests" : "طلبات الملاحق",
+        "Endorsements Requests" : "طلبات الملاحق",
         "Cancellation Requests" : "طلبات الالغاء",
         "Renewals Requests" : "طلبات التجديد",
         "Your Policies" : "وثائقك",
@@ -74,7 +74,7 @@
         "I confirm that i am a resident in Egypt": "أؤكد أنني مقيم في مصر",
         "Product" : "المنتج",
         "Create App": "إنشاء طلب تأمينى",
-        "Price": "السعر",
+        "Price": "إجمالي قسط التأمين الخاص بك",
         "Sum Insured" : "المبلغ التأمينى",
         "Job" : "الوظيفة"
     },
@@ -286,7 +286,11 @@
         "Language": "اللغة",
         "CANCEL": "الغاء",
         "Sign In as Surveyor": "تسجيل الدخول كمعاين",
-        "Sign In as Customer": "تسجيل الدخول كعميل"
+        "Sign In as Customer": "تسجيل الدخول كعميل",
+        "Sign Up": "إنشاء حساب جديد",
+        "Name": "الإسم",
+        "Email": "البريد الإلكترونى",
+        "Mobile Number":"رقم التليفون" 
     },
     "collections": {
         "policy_num": "رقم البوليصة",

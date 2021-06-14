@@ -3,9 +3,62 @@
 
 /** Ionic CSS Variables **/
 .my-custom-class .popover-wrapper.sc-ion-popover-md .popover-content.sc-ion-popover-md {
-  top: 64px !important;
-  left: 65px !important;
+  top: 50px !important;
+  left: calc(50vh - 44px - 120px) !important;
+
 }
+.my-custom-class-left .popover-wrapper.sc-ion-popover-md .popover-content.sc-ion-popover-md {
+    top: 50px !important;
+    left: calc(50vh - 38px - 285px) !important;
+}
+.alert-head.sc-ion-alert-md {
+    background: #073e89 !important;
+    letter-spacing: -0.02em;
+    word-spacing: 0.015em;
+    height: 44px;
+  }
+.alert-title.sc-ion-alert-md {
+    color: #fff;
+    font-size: 16px;
+    line-height: 0.5;
+}
+.alert-button-group.sc-ion-alert-md {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.alert-radio-label.sc-ion-alert-md {
+    color: #857d7d;
+    font-size: 12px;
+}
+.select-text {
+    color: #857d7d !important;
+    font-size: 12px !important;
+    min-width: 12px !important;
+
+}
+.alert-wrapper.sc-ion-alert-md {
+    min-width: 301px;
+}
+.alert-radio-label.sc-ion-alert-md {
+    padding-inline-start: 37px !important;
+}
+.segment-button-checked > ion-card {
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    --background: #073e89 !important;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-top: 3px;
+
+}
+.segment-button-checked > ion-card > ion-icon {
+    color: white !important;
+}
+.segment-button-checked > ion-card > fa-icon {
+    color: white !important;
+}
+
 @font-face {
   font-family: 'poppins';
   src: url('../assets/fonts/Poppins-Light.ttf');//mine
